@@ -10,12 +10,20 @@ function MercedesModel({ hovered }) {
 
   const [modelScale, setModelScale] = useState(1);
 
+  // --------------------------------
+  // DRAG ROTATION STATE
+  // --------------------------------
+
+  const isDragging = useRef(false);
+  const lastPointerX = useRef(0);
+  const targetRotationY = useRef(0);
+
+  // --------------------------------
+  // PREPARE MODEL
+  // --------------------------------
+
   useEffect(() => {
     if (!scene) return;
-
-    // --------------------------------
-    // CALCULATE MODEL SIZE
-    // --------------------------------
 
     const box = new THREE.Box3().setFromObject(scene);
 
@@ -25,16 +33,10 @@ function MercedesModel({ hovered }) {
     box.getSize(size);
     box.getCenter(center);
 
-    // --------------------------------
-    // CENTER THE MERCEDES
-    // --------------------------------
-
+    // Center model
     scene.position.sub(center);
 
-    // --------------------------------
-    // SCALE THE MERCEDES
-    // --------------------------------
-
+    // Calculate scale
     const maxDimension = Math.max(
       size.x,
       size.y,
@@ -42,7 +44,6 @@ function MercedesModel({ hovered }) {
     );
 
     if (maxDimension > 0) {
-      // Car size
       const targetSize = 5.0;
 
       setModelScale(
@@ -50,10 +51,7 @@ function MercedesModel({ hovered }) {
       );
     }
 
-    // --------------------------------
-    // ENABLE SHADOWS
-    // --------------------------------
-
+    // Enable shadows
     scene.traverse((object) => {
       if (object.isMesh) {
         object.castShadow = true;
@@ -66,57 +64,85 @@ function MercedesModel({ hovered }) {
     });
   }, [scene]);
 
-  useFrame(({ clock, pointer }) => {
+  // --------------------------------
+  // POINTER DOWN
+  // --------------------------------
+
+  const handlePointerDown = (event) => {
+    isDragging.current = true;
+
+    lastPointerX.current =
+      event.clientX ?? event.touches?.[0]?.clientX ?? 0;
+  };
+
+  // --------------------------------
+  // POINTER MOVE
+  // --------------------------------
+
+  const handlePointerMove = (event) => {
+    if (!isDragging.current) return;
+
+    const currentX =
+      event.clientX ??
+      event.touches?.[0]?.clientX ??
+      0;
+
+    const deltaX =
+      currentX - lastPointerX.current;
+
+    lastPointerX.current = currentX;
+
+    // Drag sensitivity
+    targetRotationY.current +=
+      deltaX * 0.012;
+  };
+
+  // --------------------------------
+  // POINTER UP
+  // --------------------------------
+
+  const handlePointerUp = () => {
+    isDragging.current = false;
+  };
+
+  // --------------------------------
+  // POINTER LEAVE
+  // --------------------------------
+
+  const handlePointerLeave = () => {
+    isDragging.current = false;
+  };
+
+  // --------------------------------
+  // FRAME ANIMATION
+  // --------------------------------
+
+  useFrame(({ clock }) => {
     if (!group.current) return;
 
     const t = clock.getElapsedTime();
 
     // --------------------------------
-    // SLOW AUTOMATIC ROTATION
+    // SMOOTH DRAG ROTATION
     // --------------------------------
-
-    const automaticRotation = t * 0.04;
-
-    // --------------------------------
-    // MOUSE LEFT / RIGHT ROTATION
-    // --------------------------------
-
-    const mouseRotation =
-      pointer.x * 0.9;
-
-    const targetRotation =
-      automaticRotation + mouseRotation;
 
     group.current.rotation.y =
       THREE.MathUtils.lerp(
         group.current.rotation.y,
-        targetRotation,
-        0.08
+        targetRotationY.current,
+        0.12
       );
 
     // --------------------------------
-    // MOUSE UP / DOWN TILT
-    // --------------------------------
-
-    const targetTilt =
-      pointer.y * -0.08;
-
-    group.current.rotation.x =
-      THREE.MathUtils.lerp(
-        group.current.rotation.x,
-        targetTilt,
-        0.06
-      );
-
-    // --------------------------------
-    // FLOATING + HIGHER POSITION
+    // FLOATING ANIMATION
     // --------------------------------
 
     group.current.position.y =
-      1.0 + Math.sin(t * 1.2) * 0.08;
+      1.0 +
+      Math.sin(t * 1.2) * 0.08;
 
     // --------------------------------
-    // HOVER EFFECT
+    // HOVER SCALE
     // --------------------------------
 
     const targetScale =
@@ -136,7 +162,14 @@ function MercedesModel({ hovered }) {
   });
 
   return (
-    <group ref={group}>
+    <group
+      ref={group}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      onPointerCancel={handlePointerUp}
+      onPointerLeave={handlePointerLeave}
+    >
       <primitive
         object={scene}
         rotation={[0, 0, 0]}
@@ -185,7 +218,7 @@ export default function F1Car({
 
 
 // --------------------------------
-// PRELOAD MERCEDES MODEL
+// PRELOAD MODEL
 // --------------------------------
 
 useGLTF.preload(

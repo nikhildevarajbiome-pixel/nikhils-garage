@@ -119,23 +119,14 @@
 
   color: #f20d16;
 
-  /*
-   * Subtle physical depth
-   */
   text-shadow:
     1px 1px 0 #c4080f,
     2px 2px 0 #a5060c,
     3px 3px 0 #85050a,
     4px 4px 0 #650307,
 
-    /*
-     * Soft red glow
-     */
     0 0 16px rgba(225, 6, 0, 0.35),
 
-    /*
-     * Separation from background
-     */
     0 8px 30px rgba(0, 0, 0, 0.7);
 
   transform:
@@ -384,8 +375,12 @@
     padding-bottom: 70px;
   }
 
+  /*
+   * Brighter mobile 3D car.
+   * Desktop remains unchanged.
+   */
   .hero__canvas-wrap {
-    opacity: 0.68 !important;
+    opacity: 0.92 !important;
   }
 
   .hero::after {
