@@ -1,0 +1,764 @@
+/* =========================================================
+   FUTURE — AHEAD
+   ========================================================= */
+
+.future {
+  position: relative;
+
+  overflow: hidden;
+
+  min-height: auto !important;
+  height: auto !important;
+
+  padding-top: 90px;
+  padding-bottom: 45px;
+
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(225, 6, 0, 0.08),
+      transparent 35%
+    ),
+    #030508;
+}
+
+
+/* =========================================================
+   BACKGROUND GRID
+   ========================================================= */
+
+.future::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,0.018) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.018) 1px,
+      transparent 1px
+    );
+
+  background-size: 90px 90px;
+
+  opacity: 0.55;
+}
+
+
+/* =========================================================
+   STARS
+   ========================================================= */
+
+.future__stars {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background-image:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,0.5) 1px,
+      transparent 1px
+    );
+
+  background-size: 170px 170px;
+
+  opacity: 0.2;
+}
+
+
+/* =========================================================
+   GLOW
+   ========================================================= */
+
+.future__glow {
+  position: absolute;
+
+  width: 450px;
+  height: 450px;
+
+  border-radius: 50%;
+
+  filter: blur(120px);
+
+  opacity: 0.1;
+
+  pointer-events: none;
+}
+
+.future__glow--red {
+  left: -280px;
+  top: 20%;
+
+  background: #e10600;
+}
+
+.future__glow--blue {
+  right: -300px;
+  bottom: 15%;
+
+  background: #006eff;
+}
+
+
+/* =========================================================
+   TRACK
+   ========================================================= */
+
+.future__track {
+  position: absolute;
+
+  left: -20%;
+  right: -20%;
+
+  bottom: 0;
+
+  height: 280px;
+
+  transform:
+    perspective(600px)
+    rotateX(62deg);
+
+  pointer-events: none;
+
+  opacity: 0.4;
+}
+
+.future__track::before,
+.future__track::after {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 55%;
+  height: 100%;
+
+  border-left:
+    1px solid rgba(225,6,0,0.14);
+
+  border-right:
+    1px solid rgba(225,6,0,0.14);
+}
+
+.future__track-line {
+  position: absolute;
+
+  left: 50%;
+
+  width: 3px;
+  height: 100%;
+
+  transform: translateX(-50%);
+
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      var(--color-red) 0,
+      var(--color-red) 35px,
+      transparent 35px,
+      transparent 70px
+    );
+
+  box-shadow:
+    0 0 15px rgba(225,6,0,0.4);
+
+  animation:
+    futureTrackMove 1.2s linear infinite;
+}
+
+@keyframes futureTrackMove {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 0 70px;
+  }
+}
+
+.future__track-light {
+  position: absolute;
+
+  width: 3px;
+  height: 3px;
+
+  border-radius: 50%;
+
+  background: white;
+
+  box-shadow:
+    0 0 10px white,
+    0 0 20px var(--color-red);
+}
+
+.future__track-light--1 {
+  left: 25%;
+  top: 30%;
+}
+
+.future__track-light--2 {
+  left: 72%;
+  top: 55%;
+}
+
+.future__track-light--3 {
+  left: 40%;
+  top: 75%;
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.future__inner {
+  position: relative;
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.future__header {
+  max-width: 900px;
+
+  margin-bottom: 38px;
+}
+
+.future__title {
+  max-width: 900px;
+
+  margin-top: 15px;
+
+  font-size:
+    clamp(3.2rem, 8vw, 7rem);
+
+  line-height: 0.88;
+
+  letter-spacing: -0.045em;
+
+  text-transform: uppercase;
+}
+
+.future__intro {
+  max-width: 550px;
+
+  margin-top: 20px;
+
+  color: var(--color-silver);
+
+  font-family: var(--font-hud);
+
+  font-size: 0.85rem;
+
+  line-height: 1.7;
+
+  letter-spacing: 0.04em;
+}
+
+
+/* =========================================================
+   AMBITIONS
+   ========================================================= */
+
+.future__ambitions {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 10px;
+
+  margin-bottom: 30px;
+}
+
+.future__ambition {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 14px 16px;
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+  background:
+    rgba(255,255,255,0.015);
+
+  transition:
+    transform 200ms ease,
+    border-color 200ms ease;
+}
+
+.future__ambition:hover {
+  transform: translateY(-3px);
+
+  border-color:
+    rgba(225,6,0,0.45);
+}
+
+.future__ambition span {
+  color: var(--color-red);
+
+  font-family: var(--font-hud);
+
+  font-size: 0.5rem;
+
+  letter-spacing: 0.1em;
+}
+
+.future__ambition strong {
+  color: var(--color-white);
+
+  font-family: var(--font-hud);
+
+  font-size: 0.66rem;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   ROADMAP
+   ========================================================= */
+
+.future__roadmap {
+  position: relative;
+
+  margin: 0;
+
+  padding: 26px 28px 30px;
+
+  border:
+    1px solid rgba(255,255,255,0.1);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.025),
+      rgba(255,255,255,0.008)
+    );
+}
+
+.future__roadmap-head {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-bottom: 34px;
+
+  color:
+    rgba(255,255,255,0.35);
+
+  font-family: var(--font-hud);
+
+  font-size: 0.55rem;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+}
+
+.future__roadmap-line {
+  position: absolute;
+
+  left: 8%;
+  right: 8%;
+
+  top: 91px;
+
+  height: 1px;
+
+  background:
+    rgba(255,255,255,0.12);
+}
+
+.future__roadmap-progress {
+  width: 25%;
+
+  height: 2px;
+
+  background: var(--color-red);
+
+  box-shadow:
+    0 0 12px rgba(225,6,0,0.7);
+}
+
+.future__roadmap-grid {
+  position: relative;
+
+  z-index: 2;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, 1fr);
+
+  gap: 20px;
+}
+
+.future__step {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+}
+
+.future__step-number {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 15px;
+  height: 15px;
+
+  margin-bottom: 21px;
+
+  border:
+    1px solid rgba(255,255,255,0.25);
+
+  border-radius: 50%;
+
+  background: #040608;
+
+  color:
+    rgba(255,255,255,0.3);
+
+  font-family: var(--font-hud);
+
+  font-size: 0.4rem;
+}
+
+.future__step--active
+.future__step-number {
+  border-color: var(--color-red);
+
+  background: var(--color-red);
+
+  color: white;
+
+  box-shadow:
+    0 0 15px rgba(225,6,0,0.65);
+}
+
+.future__step-content {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.future__step-content strong {
+  color: var(--color-white);
+
+  font-family: var(--font-hud);
+
+  font-size: 0.62rem;
+
+  letter-spacing: 0.1em;
+}
+
+.future__step-content span {
+  color:
+    rgba(255,255,255,0.3);
+
+  font-family: var(--font-hud);
+
+  font-size: 0.48rem;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   NEXT DESTINATION
+   ========================================================= */
+
+.future__mission {
+  display: grid;
+
+  grid-template-columns:
+    1.5fr 1fr;
+
+  gap: 45px;
+
+  margin-top: 28px;
+
+  padding: 38px 42px;
+
+  border:
+    1px solid rgba(255,255,255,0.1);
+
+  background:
+    linear-gradient(
+      120deg,
+      rgba(225,6,0,0.045),
+      rgba(255,255,255,0.01)
+    );
+}
+
+.future__mission-label {
+  color:
+    rgba(255,255,255,0.35);
+
+  font-family: var(--font-hud);
+
+  font-size: 0.55rem;
+
+  letter-spacing: 0.14em;
+}
+
+.future__mission-left h3 {
+  margin-top: 14px;
+
+  color: var(--color-white);
+
+  font-family: var(--font-display);
+
+  font-size:
+    clamp(2.3rem, 5vw, 4.5rem);
+
+  line-height: 0.88;
+
+  letter-spacing: -0.035em;
+}
+
+.future__mission-left h3 span {
+  color: var(--color-red);
+
+  text-shadow:
+    0 0 30px rgba(225,6,0,0.25);
+}
+
+
+/* Quote is INSIDE the mission box */
+
+.future__mission-quote {
+  max-width: 550px;
+
+  margin-top: 24px;
+
+  color:
+    rgba(255,255,255,0.55);
+
+  font-family: var(--font-hud);
+
+  font-size: 0.65rem;
+
+  line-height: 1.6;
+
+  letter-spacing: 0.04em;
+}
+
+.future__mission-subquote {
+  display: block;
+
+  margin-top: 8px;
+
+  color: var(--color-red);
+
+  font-family: var(--font-hud);
+
+  font-size: 0.5rem;
+
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   TELEMETRY
+   ========================================================= */
+
+.future__mission-right {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  gap: 20px;
+}
+
+.future__telemetry {
+  display: flex;
+
+  justify-content: space-between;
+
+  padding-bottom: 11px;
+
+  border-bottom:
+    1px solid rgba(255,255,255,0.07);
+}
+
+.future__telemetry span {
+  color:
+    rgba(255,255,255,0.3);
+
+  font-family: var(--font-hud);
+
+  font-size: 0.5rem;
+
+  letter-spacing: 0.12em;
+}
+
+.future__telemetry strong {
+  color: var(--color-silver);
+
+  font-family: var(--font-hud);
+
+  font-size: 0.58rem;
+
+  letter-spacing: 0.08em;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.future__footer {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-top: 25px;
+
+  padding-top: 15px;
+
+  border-top:
+    1px solid rgba(255,255,255,0.08);
+
+  color:
+    rgba(255,255,255,0.28);
+
+  font-family: var(--font-hud);
+
+  font-size: 0.5rem;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+}
+
+.future__footer strong {
+  color: var(--color-red);
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .future__ambitions {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .future__roadmap {
+    overflow-x: auto;
+  }
+
+  .future__roadmap-grid {
+    min-width: 700px;
+  }
+
+  .future__mission {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .future {
+    padding-top: 80px;
+    padding-bottom: 40px;
+  }
+
+  .future__title {
+    font-size:
+      clamp(2.8rem, 14vw, 4.2rem);
+  }
+
+  .future__ambitions {
+    grid-template-columns: 1fr;
+
+    gap: 9px;
+  }
+
+  .future__roadmap {
+    padding:
+      22px 18px 25px;
+  }
+
+  .future__mission {
+    margin-top: 25px;
+
+    padding:
+      28px 22px;
+
+    gap: 32px;
+  }
+
+  .future__mission-left h3 {
+    font-size: 2.5rem;
+  }
+
+  .future__track {
+    opacity: 0.3;
+  }
+
+  .future__footer {
+    flex-direction: column;
+
+    gap: 8px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .future__track-line {
+    animation: none;
+  }
+
+  .future__ambition {
+    transition: none;
+  }
+}

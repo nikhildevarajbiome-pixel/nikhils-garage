@@ -1,0 +1,53 @@
+.sound-toggle {
+  position: fixed;
+  right: clamp(16px, 3vw, 28px);
+  bottom: calc(clamp(16px, 3vw, 28px) + var(--safe-bottom));
+  z-index: 150;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--color-line);
+  background: rgba(11, 13, 16, 0.85);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+.sound-toggle__bar {
+  width: 3px;
+  height: 10px;
+  background: var(--color-silver-dim);
+  border-radius: 2px;
+  transition: height 200ms ease, background 200ms ease;
+}
+
+.sound-toggle--on .sound-toggle__bar {
+  background: var(--color-red);
+  animation: soundBars 900ms ease-in-out infinite;
+}
+
+.sound-toggle--on .sound-toggle__bar:nth-child(2) {
+  animation-delay: 150ms;
+}
+.sound-toggle--on .sound-toggle__bar:nth-child(3) {
+  animation-delay: 300ms;
+}
+
+@keyframes soundBars {
+  0%,
+  100% {
+    height: 8px;
+  }
+  50% {
+    height: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sound-toggle--on .sound-toggle__bar {
+    animation: none;
+    height: 14px;
+  }
+}

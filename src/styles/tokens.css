@@ -1,0 +1,32 @@
+:root {
+  /* ---------- COLOR ---------- */
+  --color-void: #05070a;         /* deep space background */
+  --color-carbon: #0b0d10;       /* panel / carbon-fiber base */
+  --color-carbon-2: #14171c;     /* raised panel */
+  --color-line: #23272e;         /* hairline borders */
+  --color-white: #f2f3f5;        /* primary text */
+  --color-silver: #9aa3ad;       /* secondary text */
+  --color-silver-dim: #5c6470;   /* tertiary / labels */
+  --color-red: #e10600;          /* racing red — primary accent */
+  --color-red-glow: #ff3b30;     /* brighter red for glow/hover */
+
+  /* ---------- TYPE ---------- */
+  --font-display: "Orbitron", "Rajdhani", sans-serif;
+  --font-hud: "Rajdhani", sans-serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* ---------- LAYOUT ---------- */
+  --content-max: 1180px;
+  --gutter: clamp(20px, 5vw, 64px);
+  --section-pad: clamp(72px, 12vh, 140px);
+
+  /* ---------- MOTION ---------- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 220ms;
+  --dur-med: 520ms;
+  --dur-slow: 900ms;
+
+  /* ---------- SAFE AREA ---------- */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}

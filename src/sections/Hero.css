@@ -1,0 +1,489 @@
+/* =========================================================
+   HERO — NIKHIL'S GARAGE
+   Premium F1 / Motorsport Landing Section
+   ========================================================= */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+
+  display: flex;
+  align-items: flex-end;
+
+  padding-top: calc(var(--safe-top) + 80px);
+  padding-bottom: clamp(55px, 9vh, 105px);
+
+  overflow: hidden;
+  isolation: isolate;
+}
+
+
+/* =========================================================
+   3D CAR
+   ========================================================= */
+
+.hero__canvas-wrap {
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease;
+
+  will-change: transform, opacity;
+
+  pointer-events: auto;
+}
+
+.hero__canvas-wrap canvas {
+  width: 100% !important;
+  height: 100% !important;
+
+  display: block;
+
+  touch-action: none;
+}
+
+
+/* =========================================================
+   DARK GRADIENT
+   ========================================================= */
+
+.hero::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.03) 0%,
+      rgba(0, 0, 0, 0.04) 42%,
+      rgba(0, 0, 0, 0.74) 100%
+    );
+}
+
+
+/* =========================================================
+   HERO CONTENT
+   ========================================================= */
+
+.hero__content {
+  position: relative;
+
+  z-index: 3;
+
+  pointer-events: none;
+
+  width: 100%;
+
+  max-width: 1250px;
+
+  margin: 0 auto;
+}
+
+.hero__content > * {
+  pointer-events: auto;
+}
+
+
+/* =========================================================
+   NIKHIL'S GARAGE — PREMIUM RED 3D
+   ========================================================= */
+
+.hero__title {
+  position: relative;
+
+  margin: 16px 0 0;
+
+  max-width: 12ch;
+
+  font-size: clamp(
+    3.2rem,
+    8vw,
+    6.8rem
+  );
+
+  line-height: 0.92;
+
+  font-weight: 900;
+
+  letter-spacing: -0.045em;
+
+  color: #f20d16;
+
+  /*
+   * Subtle physical depth
+   */
+  text-shadow:
+    1px 1px 0 #c4080f,
+    2px 2px 0 #a5060c,
+    3px 3px 0 #85050a,
+    4px 4px 0 #650307,
+
+    /*
+     * Soft red glow
+     */
+    0 0 16px rgba(225, 6, 0, 0.35),
+
+    /*
+     * Separation from background
+     */
+    0 8px 30px rgba(0, 0, 0, 0.7);
+
+  transform:
+    perspective(1000px)
+    rotateX(3deg);
+}
+
+
+/* =========================================================
+   SMALL TOP HIGHLIGHT
+   ========================================================= */
+
+.hero__title::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  width: 48%;
+  height: 2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 80, 80, 0.9),
+      transparent
+    );
+
+  opacity: 0.7;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   TAGLINE
+   ========================================================= */
+
+.hero__tagline {
+  margin-top: 24px;
+
+  max-width: 520px;
+
+  font-family: var(--font-hud);
+
+  font-size: clamp(
+    1rem,
+    1.8vw,
+    1.25rem
+  );
+
+  line-height: 1.65;
+
+  letter-spacing: 0.025em;
+
+  color: var(--color-silver);
+
+  text-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.8);
+}
+
+
+/* =========================================================
+   NAME / LOCATION
+   ========================================================= */
+
+.hero__meta {
+  margin-top: 30px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  font-family: var(--font-hud);
+
+  font-size: 0.72rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.18em;
+
+  color: var(--color-silver-dim);
+
+  text-transform: uppercase;
+}
+
+.hero__meta-divider {
+  width: 28px;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--color-red),
+      transparent
+    );
+
+  opacity: 0.8;
+}
+
+
+/* =========================================================
+   SCROLL INDICATOR
+   ========================================================= */
+
+.hero__scroll-cue {
+  position: absolute;
+
+  left: 50%;
+
+  bottom: 30px;
+
+  transform: translateX(-50%);
+
+  z-index: 4;
+
+  width: 24px;
+
+  height: 40px;
+
+  border: 1px solid
+    rgba(255, 255, 255, 0.28);
+
+  border-radius: 14px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  backdrop-filter: blur(5px);
+
+  box-shadow:
+    0 0 20px rgba(0, 0, 0, 0.25);
+}
+
+.hero__scroll-cue span {
+  position: absolute;
+
+  top: 7px;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 3px;
+
+  height: 8px;
+
+  border-radius: 3px;
+
+  background: var(--color-red);
+
+  box-shadow:
+    0 0 10px
+    rgba(225, 6, 0, 0.8);
+
+  animation:
+    scrollCue 1.8s ease-in-out infinite;
+}
+
+
+@keyframes scrollCue {
+  0% {
+    opacity: 1;
+    top: 7px;
+  }
+
+  50% {
+    opacity: 0.25;
+  }
+
+  70% {
+    opacity: 0;
+    top: 22px;
+  }
+
+  100% {
+    opacity: 0;
+    top: 7px;
+  }
+}
+
+
+/* =========================================================
+   DESKTOP
+   ========================================================= */
+
+@media (min-width: 1100px) {
+
+  .hero__content {
+    padding-left: 4vw;
+    padding-right: 4vw;
+  }
+
+  .hero__title {
+    max-width: 10ch;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .hero {
+    padding-bottom: 70px;
+  }
+
+  .hero__content {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+
+  .hero__title {
+    font-size: clamp(
+      3rem,
+      9vw,
+      5rem
+    );
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 720px) {
+
+  .hero {
+    min-height: 100svh;
+
+    align-items: flex-end;
+
+    padding-top: 90px;
+
+    padding-bottom: 70px;
+  }
+
+  .hero__canvas-wrap {
+    opacity: 0.68 !important;
+  }
+
+  .hero::after {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.08) 0%,
+        rgba(0, 0, 0, 0.2) 40%,
+        rgba(0, 0, 0, 0.85) 100%
+      );
+  }
+
+  .hero__content {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .hero__title {
+    max-width: 9ch;
+
+    font-size: clamp(
+      2.8rem,
+      14vw,
+      4.2rem
+    );
+
+    line-height: 0.94;
+  }
+
+  .hero__tagline {
+    max-width: 360px;
+
+    margin-top: 18px;
+
+    font-size: 0.95rem;
+
+    line-height: 1.55;
+  }
+
+  .hero__meta {
+    margin-top: 22px;
+
+    font-size: 0.62rem;
+
+    letter-spacing: 0.14em;
+  }
+
+  .hero__scroll-cue {
+    bottom: 18px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 430px) {
+
+  .hero__content {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .hero__title {
+    font-size: 2.75rem;
+  }
+
+  .hero__tagline {
+    font-size: 0.88rem;
+  }
+
+  .hero__meta {
+    gap: 10px;
+
+    font-size: 0.56rem;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .hero__scroll-cue span {
+    animation: none;
+
+    opacity: 1;
+
+    top: 7px;
+  }
+
+  .hero__canvas-wrap {
+    transition: none;
+  }
+
+}

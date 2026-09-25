@@ -1,0 +1,1952 @@
+/* =========================================================
+   GARAGE — PRIVATE RACING BAY
+   ========================================================= */
+
+.garage {
+
+  position: relative;
+
+  min-height: 100svh;
+
+  padding-top:
+    clamp(130px, 13vw, 190px);
+
+  padding-bottom:
+    clamp(130px, 13vw, 190px);
+
+  overflow: hidden;
+
+  isolation: isolate;
+}
+
+
+/* =========================================================
+   AMBIENT ENVIRONMENT
+   ========================================================= */
+
+.garage__ambient {
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: -2;
+
+  pointer-events: none;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 35%,
+      rgba(25, 29, 36, 0.28),
+      rgba(3, 5, 8, 0.96) 72%
+    );
+}
+
+
+/* =========================================================
+   GARAGE CEILING LIGHT
+   ========================================================= */
+
+.garage__ceiling-light {
+
+  position: absolute;
+
+  top: 0;
+
+  left: 50%;
+
+  width: 80%;
+
+  height: 2px;
+
+  transform:
+    translateX(-50%);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.15),
+      transparent
+    );
+
+  box-shadow:
+    0 0 40px
+    rgba(255, 255, 255, 0.08);
+}
+
+
+/* =========================================================
+   PERSPECTIVE FLOOR
+   ========================================================= */
+
+.garage__grid-floor {
+
+  position: absolute;
+
+  left: 50%;
+
+  bottom: -24%;
+
+  width: 180%;
+
+  height: 75%;
+
+  transform:
+    translateX(-50%)
+    perspective(600px)
+    rotateX(64deg);
+
+  background-image:
+
+    linear-gradient(
+      rgba(255, 255, 255, 0.045) 1px,
+      transparent 1px
+    ),
+
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.045) 1px,
+      transparent 1px
+    );
+
+  background-size:
+    75px 75px;
+
+  mask-image:
+    linear-gradient(
+      to top,
+      black,
+      transparent
+    );
+
+  opacity:
+    0.35;
+
+  animation:
+    garageFloorMove 5s linear infinite;
+}
+
+
+@keyframes garageFloorMove {
+
+  from {
+    background-position:
+      0 0;
+  }
+
+  to {
+    background-position:
+      0 75px;
+  }
+}
+
+
+/* =========================================================
+   SPEED LINES
+   ========================================================= */
+
+.garage__speed-lines {
+
+  position: absolute;
+
+  inset: -30%;
+
+  opacity:
+    0.25;
+
+  background:
+
+    repeating-linear-gradient(
+      105deg,
+      transparent 0,
+      transparent 95px,
+      rgba(255, 255, 255, 0.04) 96px,
+      transparent 97px
+    );
+
+  transition:
+    transform 0.12s linear;
+}
+
+
+/* =========================================================
+   RED TRACK
+   ========================================================= */
+
+.garage__red-track {
+
+  position: absolute;
+
+  left: 50%;
+
+  bottom: -20%;
+
+  width: 125%;
+
+  height: 55%;
+
+  transform:
+    translateX(-50%)
+    perspective(600px)
+    rotateX(63deg);
+
+  border-top:
+    2px solid
+    rgba(225, 6, 0, 0.52);
+
+  border-radius:
+    50%;
+
+  filter:
+    drop-shadow(
+      0 0 14px
+      rgba(225, 6, 0, 0.5)
+    );
+
+  transition:
+    transform 0.12s linear;
+
+  animation:
+    garageTrackPulse 4s ease-in-out infinite;
+}
+
+
+@keyframes garageTrackPulse {
+
+  0%,
+  100% {
+    opacity:
+      0.3;
+  }
+
+  50% {
+    opacity:
+      0.75;
+  }
+}
+
+
+/* =========================================================
+   AMBIENT GLOW
+   ========================================================= */
+
+.garage__ambient-red {
+
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  left: -260px;
+  top: 35%;
+
+  border-radius:
+    50%;
+
+  background:
+    rgba(225, 6, 0, 0.075);
+
+  filter:
+    blur(120px);
+}
+
+
+.garage__ambient-blue {
+
+  position: absolute;
+
+  width: 400px;
+  height: 400px;
+
+  right: -220px;
+  top: 10%;
+
+  border-radius:
+    50%;
+
+  background:
+    rgba(40, 85, 150, 0.055);
+
+  filter:
+    blur(120px);
+}
+
+
+/* =========================================================
+   PARTICLES
+   ========================================================= */
+
+.garage__particles {
+
+  position: absolute;
+
+  inset: 0;
+
+  opacity:
+    0.3;
+
+  background-image:
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.6) 1px,
+      transparent 1px
+    );
+
+  background-size:
+    150px 150px;
+
+  animation:
+    garageParticles 18s linear infinite;
+}
+
+
+@keyframes garageParticles {
+
+  from {
+    transform:
+      translateY(0);
+  }
+
+  to {
+    transform:
+      translateY(150px);
+  }
+}
+
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.garage__container {
+
+  position:
+    relative;
+
+  z-index:
+    2;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.garage__header {
+
+  max-width:
+    1100px;
+}
+
+
+.garage__eyebrow {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    22px;
+
+  flex-wrap:
+    wrap;
+}
+
+
+.garage__status {
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    8px;
+
+  font-family:
+    var(--font-hud);
+
+  font-size:
+    0.55rem;
+
+  letter-spacing:
+    0.15em;
+
+  color:
+    rgba(255, 255, 255, 0.32);
+}
+
+
+.garage__status span {
+
+  width:
+    6px;
+
+  height:
+    6px;
+
+  border-radius:
+    50%;
+
+  background:
+    var(--color-red);
+
+  box-shadow:
+    0 0 12px
+    rgba(225, 6, 0, 0.8);
+
+  animation:
+    garageStatus 1.5s ease-in-out infinite;
+}
+
+
+@keyframes garageStatus {
+
+  0%,
+  100% {
+    opacity:
+      0.35;
+  }
+
+  50% {
+    opacity:
+      1;
+  }
+}
+
+
+/* =========================================================
+   HEADING
+   ========================================================= */
+
+.garage__heading-row {
+
+  margin-top:
+    18px;
+
+  display:
+    flex;
+
+  align-items:
+    flex-end;
+
+  justify-content:
+    space-between;
+
+  gap:
+    40px;
+}
+
+
+.garage__title {
+
+  font-size:
+    clamp(4rem, 8vw, 8rem);
+
+  line-height:
+    0.84;
+
+  letter-spacing:
+    -0.055em;
+
+  text-shadow:
+    0 25px 70px
+    rgba(0, 0, 0, 0.7);
+}
+
+
+.garage__subtitle {
+
+  margin-top:
+    18px;
+
+  font-family:
+    var(--font-hud);
+
+  font-size:
+    0.58rem;
+
+  letter-spacing:
+    0.2em;
+
+  color:
+    var(--color-red);
+}
+
+
+.garage__number {
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    flex-end;
+}
+
+
+.garage__number span {
+
+  font-family:
+    var(--font-hud);
+
+  font-size:
+    0.48rem;
+
+  letter-spacing:
+    0.15em;
+
+  color:
+    rgba(255, 255, 255, 0.22);
+}
+
+
+.garage__number strong {
+
+  font-family:
+    var(--font-display);
+
+  font-size:
+    4rem;
+
+  line-height:
+    0.8;
+
+  color:
+    rgba(255, 255, 255, 0.06);
+}
+
+
+/* =========================================================
+   MACHINE GRID
+   ========================================================= */
+
+.garage__grid {
+
+  margin-top:
+    65px;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap:
+    16px;
+}
+
+
+/* =========================================================
+   MACHINE CARD
+   ========================================================= */
+
+.garage__card {
+
+  position:
+    relative;
+
+  min-height:
+    360px;
+
+  padding:
+    22px;
+
+  overflow:
+    hidden;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.08);
+
+  border-top:
+    2px solid
+    rgba(255, 255, 255, 0.12);
+
+  border-radius:
+    9px;
+
+  background:
+    rgba(8, 10, 14, 0.7);
+
+  backdrop-filter:
+    blur(12px);
+
+  box-shadow:
+    0 30px 80px
+    rgba(0, 0, 0, 0.32);
+
+  transition:
+    transform 0.45s ease,
+    border-color 0.45s ease,
+    box-shadow 0.45s ease;
+}
+
+
+.garage__card:hover {
+
+  transform:
+    translateY(-9px);
+
+  box-shadow:
+    0 45px 100px
+    rgba(0, 0, 0, 0.5);
+}
+
+
+/* =========================================================
+   CARD ACCENTS
+   ========================================================= */
+
+.garage__card--car {
+
+  border-top-color:
+    var(--color-red);
+}
+
+
+.garage__card--bike {
+
+  border-top-color:
+    #596779;
+}
+
+
+.garage__card--racing {
+
+  border-top-color:
+    rgba(255, 255, 255, 0.35);
+}
+
+
+/* =========================================================
+   CARD BACKGROUND
+   ========================================================= */
+
+.garage__card-bg {
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  background:
+
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.025),
+      transparent 40%
+    ),
+
+    radial-gradient(
+      circle at 70% 25%,
+      rgba(225, 6, 0, 0.08),
+      transparent 42%
+    );
+
+  pointer-events:
+    none;
+}
+
+
+.garage__card--bike
+.garage__card-bg {
+
+  background:
+
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.025),
+      transparent 40%
+    ),
+
+    radial-gradient(
+      circle at 70% 25%,
+      rgba(90, 110, 135, 0.1),
+      transparent 42%
+    );
+}
+
+
+/* =========================================================
+   CARD TOP
+   ========================================================= */
+
+.garage__card-top {
+
+  position:
+    relative;
+
+  z-index:
+    3;
+
+  display:
+    flex;
+
+  justify-content:
+    space-between;
+
+  align-items:
+    center;
+}
+
+
+.garage__card-index {
+
+  font-family:
+    var(--font-hud);
+
+  font-size:
+    0.6rem;
+
+  color:
+    rgba(255, 255, 255, 0.25);
+}
+
+
+.garage__card-status {
+
+  font-family:
+    var(--font-hud);
+
+  font-size:
+    0.46rem;
+
+  letter-spacing:
+    0.15em;
+
+  color:
+    var(--color-red);
+}
+
+
+/* =========================================================
+   MACHINE VISUAL
+   ========================================================= */
+
+.garage__machine {
+
+  position:
+    absolute;
+
+  width:
+    210px;
+
+  height:
+    210px;
+
+  top:
+    50%;
+
+  left:
+    50%;
+
+  transform:
+    translate(-50%, -50%);
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+}
+
+
+.garage__machine-ring {
+
+  width:
+    145px;
+
+  height:
+    145px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.1);
+
+  border-radius:
+    50%;
+
+  transform:
+    rotate(45deg);
+
+  animation:
+    garageRing 12s linear infinite;
+}
+
+
+.garage__machine-ring::before,
+.garage__machine-ring::after {
+
+  content:
+    "";
+
+  position:
+    absolute;
+
+  inset:
+    18px;
+
+  border:
+    1px dashed
+    rgba(225, 6, 0, 0.2);
+
+  border-radius:
+    50%;
+}
+
+
+.garage__machine-ring::after {
+
+  inset:
+    38px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.06);
+}
+
+
+.garage__machine-ring span {
+
+  position:
+    absolute;
+
+  top:
+    -4px;
+
+  left:
+    50%;
+
+  width:
+    7px;
+
+  height:
+    7px;
+
+  border-radius:
+    50%;
+
+  background:
+    var(--color-red);
+
+  box-shadow:
+    0 0 14px
+    rgba(225, 6, 0, 0.9);
+}
+
+
+@keyframes garageRing {
+
+  to {
+    transform:
+      rotate(405deg);
+  }
+}
+
+
+.garage__machine-glow {
+
+  position:
+    absolute;
+
+  width:
+    100px;
+
+  height:
+    100px;
+
+  border-radius:
+    50%;
+
+  background:
+    rgba(225, 6, 0, 0.09);
+
+  filter:
+    blur(35px);
+
+  animation:
+    garageMachineGlow 3s ease-in-out infinite alternate;
+}
+
+
+@keyframes garageMachineGlow {
+
+  from {
+    transform:
+      scale(0.8);
+  }
+
+  to {
+    transform:
+      scale(1.2);
+  }
+}
+
+
+/* =========================================================
+   CARD CONTENT
+   ========================================================= */
+
+.garage__card-content {
+
+  position:
+    absolute;
+
+  left:
+    22px;
+
+  right:
+    22px;
+
+  bottom:
+    62px;
+
+  z-index:
+    4;
+}
+
+
+.garage__card-note {
+
+  font-family:
+    var(--font-hud);
+
+  font-size:
+    0.52rem;
+
+  letter-spacing:
+    0.14em;
+
+  color:
+    var(--color-red);
+}
+
+
+.garage__card-name {
+
+  display:
+    block;
+
+  margin-top:
+    7px;
+
+  font-family:
+    var(--font-display);
+
+  font-size:
+    clamp(1.45rem, 2.6vw, 2rem);
+
+  line-height:
+    1;
+
+  color:
+    var(--color-white);
+}
+
+
+/* =========================================================
+   CARD BOTTOM
+   ========================================================= */
+
+.garage__card-bottom {
+
+  position:
+    absolute;
+
+  left:
+    22px;
+
+  right:
+    22px;
+
+  bottom:
+    20px;
+
+  z-index:
+    4;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    9px;
+
+  font-family:
+    var(--font-hud);
+
+  font-size:
+    0.43rem;
+
+  letter-spacing:
+    0.13em;
+
+  color:
+    rgba(255, 255, 255, 0.2);
+}
+
+
+.garage__card-line {
+
+  flex:
+    1;
+
+  height:
+    1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--color-red),
+      transparent
+    );
+}
+
+
+/* =========================================================
+   TELEMETRY
+   ========================================================= */
+
+.garage__telemetry {
+
+  margin-top:
+    24px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    13px;
+
+  font-family:
+    var(--font-hud);
+
+  font-size:
+    0.47rem;
+
+  letter-spacing:
+    0.15em;
+
+  color:
+    rgba(255, 255, 255, 0.24);
+}
+
+
+.garage__telemetry-line {
+
+  flex:
+    1;
+
+  height:
+    1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(225, 6, 0, 0.5),
+      transparent
+    );
+}
+
+
+.garage__bars {
+
+  display:
+    flex;
+
+  align-items:
+    flex-end;
+
+  gap:
+    3px;
+
+  height:
+    14px;
+}
+
+
+.garage__bars i {
+
+  width:
+    3px;
+
+  background:
+    var(--color-red);
+
+  box-shadow:
+    0 0 5px
+    rgba(225, 6, 0, 0.5);
+
+  animation:
+    garageBars 1s ease-in-out infinite alternate;
+}
+
+
+.garage__bars i:nth-child(1) {
+  height: 4px;
+}
+
+.garage__bars i:nth-child(2) {
+  height: 8px;
+  animation-delay: 0.1s;
+}
+
+.garage__bars i:nth-child(3) {
+  height: 11px;
+  animation-delay: 0.2s;
+}
+
+.garage__bars i:nth-child(4) {
+  height: 7px;
+  animation-delay: 0.3s;
+}
+
+.garage__bars i:nth-child(5) {
+  height: 13px;
+  animation-delay: 0.4s;
+}
+
+.garage__bars i:nth-child(6) {
+  height: 9px;
+  animation-delay: 0.5s;
+}
+
+
+@keyframes garageBars {
+
+  from {
+    opacity:
+      0.25;
+  }
+
+  to {
+    opacity:
+      1;
+  }
+}
+
+
+/* =========================================================
+   COMMAND CENTER
+   ========================================================= */
+
+.garage__pc {
+
+  margin-top:
+    75px;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    1.15fr 0.85fr;
+
+  gap:
+    clamp(35px, 6vw, 75px);
+
+  align-items:
+    center;
+}
+
+
+/* =========================================================
+   PC VISUAL
+   ========================================================= */
+
+.garage__pc-visual-wrap {
+
+  position:
+    relative;
+}
+
+
+.garage__pc-visual {
+
+  position:
+    relative;
+
+  aspect-ratio:
+    16 / 10;
+
+  overflow:
+    hidden;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.1);
+
+  border-radius:
+    8px;
+
+  background:
+    #080a0e;
+
+  box-shadow:
+    0 35px 100px
+    rgba(0, 0, 0, 0.5);
+}
+
+
+.garage__pc-image {
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  background-size:
+    cover;
+
+  background-position:
+    center;
+
+  opacity:
+    0.82;
+
+  transition:
+    transform 0.8s ease;
+}
+
+
+.garage__pc-visual:hover
+.garage__pc-image {
+
+  transform:
+    scale(1.035);
+}
+
+
+/* =========================================================
+   PC OVERLAY
+   ========================================================= */
+
+.garage__pc-glow {
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  background:
+    radial-gradient(
+      circle at 30% 20%,
+      rgba(225, 6, 0, 0.25),
+      transparent 50%
+    );
+
+  pointer-events:
+    none;
+}
+
+
+.garage__pc-scan {
+
+  position:
+    absolute;
+
+  left:
+    0;
+
+  right:
+    0;
+
+  top:
+    0;
+
+  height:
+    2px;
+
+  background:
+    rgba(225, 6, 0, 0.5);
+
+  box-shadow:
+    0 0 12px
+    rgba(225, 6, 0, 0.5);
+
+  animation:
+    pcScan 5s linear infinite;
+}
+
+
+@keyframes pcScan {
+
+  from {
+    transform:
+      translateY(0);
+  }
+
+  to {
+    transform:
+      translateY(320px);
+  }
+}
+
+
+/* =========================================================
+   PC CORNERS
+   ========================================================= */
+
+.garage__pc-corners span {
+
+  position:
+    absolute;
+
+  z-index:
+    4;
+
+  width:
+    25px;
+
+  height:
+    25px;
+}
+
+
+.garage__pc-corners span::before,
+.garage__pc-corners span::after {
+
+  content:
+    "";
+
+  position:
+    absolute;
+
+  background:
+    var(--color-red);
+
+  box-shadow:
+    0 0 8px
+    rgba(225, 6, 0, 0.6);
+}
+
+
+.garage__pc-corners span::before {
+
+  width:
+    25px;
+
+  height:
+    1px;
+}
+
+
+.garage__pc-corners span::after {
+
+  width:
+    1px;
+
+  height:
+    25px;
+}
+
+
+.garage__pc-corners span:nth-child(1) {
+
+  top:
+    12px;
+
+  left:
+    12px;
+}
+
+
+.garage__pc-corners span:nth-child(2) {
+
+  top:
+    12px;
+
+  right:
+    12px;
+
+  transform:
+    rotate(90deg);
+}
+
+
+.garage__pc-corners span:nth-child(3) {
+
+  bottom:
+    12px;
+
+  left:
+    12px;
+
+  transform:
+    rotate(-90deg);
+}
+
+
+.garage__pc-corners span:nth-child(4) {
+
+  bottom:
+    12px;
+
+  right:
+    12px;
+
+  transform:
+    rotate(180deg);
+}
+
+
+/* =========================================================
+   PC LABEL
+   ========================================================= */
+
+.garage__pc-label {
+
+  position:
+    absolute;
+
+  z-index:
+    4;
+
+  top:
+    18px;
+
+  left:
+    18px;
+
+  padding:
+    7px 10px;
+
+  font-family:
+    var(--font-hud);
+
+  font-size:
+    0.48rem;
+
+  letter-spacing:
+    0.15em;
+
+  color:
+    rgba(255, 255, 255, 0.6);
+
+  background:
+    rgba(0, 0, 0, 0.4);
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.1);
+
+  backdrop-filter:
+    blur(6px);
+}
+
+
+/* =========================================================
+   PC HUD
+   ========================================================= */
+
+.garage__pc-hud {
+
+  position:
+    absolute;
+
+  z-index:
+    5;
+
+  left:
+    18px;
+
+  right:
+    18px;
+
+  bottom:
+    18px;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  background:
+    rgba(5, 7, 10, 0.7);
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.1);
+
+  backdrop-filter:
+    blur(8px);
+}
+
+
+.garage__pc-hud div {
+
+  padding:
+    10px 13px;
+
+  border-right:
+    1px solid
+    rgba(255, 255, 255, 0.07);
+}
+
+
+.garage__pc-hud div:last-child {
+
+  border-right:
+    none;
+}
+
+
+.garage__pc-hud span {
+
+  display:
+    block;
+
+  font-family:
+    var(--font-hud);
+
+  font-size:
+    0.42rem;
+
+  letter-spacing:
+    0.12em;
+
+  color:
+    rgba(255, 255, 255, 0.3);
+}
+
+
+.garage__pc-hud strong {
+
+  display:
+    block;
+
+  margin-top:
+    3px;
+
+  font-family:
+    var(--font-hud);
+
+  font-size:
+    0.65rem;
+
+  color:
+    var(--color-white);
+}
+
+
+/* =========================================================
+   PC CONTENT
+   ========================================================= */
+
+.garage__pc-title {
+
+  margin-top:
+    12px;
+
+  font-family:
+    var(--font-display);
+
+  font-size:
+    clamp(2rem, 4vw, 3.2rem);
+
+  line-height:
+    0.95;
+}
+
+
+.garage__pc-description {
+
+  margin-top:
+    18px;
+
+  color:
+    var(--color-silver);
+
+  line-height:
+    1.7;
+
+  max-width:
+    48ch;
+}
+
+
+.garage__pc-specs {
+
+  margin-top:
+    30px;
+
+  display:
+    grid;
+
+  gap:
+    12px;
+}
+
+
+.garage__pc-specs div {
+
+  display:
+    flex;
+
+  justify-content:
+    space-between;
+
+  gap:
+    20px;
+
+  padding-bottom:
+    10px;
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.07);
+}
+
+
+.garage__pc-specs span {
+
+  font-family:
+    var(--font-hud);
+
+  font-size:
+    0.48rem;
+
+  letter-spacing:
+    0.13em;
+
+  color:
+    rgba(255, 255, 255, 0.25);
+}
+
+
+.garage__pc-specs strong {
+
+  font-family:
+    var(--font-hud);
+
+  font-size:
+    0.53rem;
+
+  letter-spacing:
+    0.08em;
+
+  color:
+    var(--color-white);
+}
+
+
+.garage__pc-quote {
+
+  margin-top:
+    30px;
+
+  display:
+    flex;
+
+  gap:
+    12px;
+
+  align-items:
+    flex-start;
+}
+
+
+.garage__pc-quote > span {
+
+  color:
+    var(--color-red);
+
+  font-family:
+    var(--font-hud);
+}
+
+
+.garage__pc-quote p {
+
+  font-family:
+    var(--font-hud);
+
+  font-size:
+    0.62rem;
+
+  line-height:
+    1.7;
+
+  letter-spacing:
+    0.1em;
+
+  color:
+    rgba(255, 255, 255, 0.4);
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.garage__footer {
+
+  margin-top:
+    65px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    12px;
+
+  font-family:
+    var(--font-hud);
+
+  font-size:
+    0.45rem;
+
+  letter-spacing:
+    0.15em;
+
+  color:
+    rgba(255, 255, 255, 0.22);
+}
+
+
+.garage__footer-line {
+
+  flex:
+    1;
+
+  height:
+    1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--color-red),
+      transparent
+    );
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .garage__grid {
+
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+
+  .garage__card:last-child {
+
+    grid-column:
+      span 2;
+  }
+
+
+  .garage__pc {
+
+    grid-template-columns:
+      1fr;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 620px) {
+
+  .garage {
+
+    min-height:
+      auto;
+
+    padding-top:
+      105px;
+
+    padding-bottom:
+      100px;
+  }
+
+
+  .garage__heading-row {
+
+    align-items:
+      flex-start;
+  }
+
+
+  .garage__number {
+
+    display:
+      none;
+  }
+
+
+  .garage__title {
+
+    font-size:
+      3.5rem;
+  }
+
+
+  .garage__subtitle {
+
+    font-size:
+      0.5rem;
+
+    line-height:
+      1.6;
+  }
+
+
+  .garage__grid {
+
+    margin-top:
+      50px;
+
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .garage__card:last-child {
+
+    grid-column:
+      auto;
+  }
+
+
+  .garage__card {
+
+    min-height:
+      310px;
+  }
+
+
+  .garage__telemetry {
+
+    flex-wrap:
+      wrap;
+
+    line-height:
+      1.7;
+  }
+
+
+  .garage__pc {
+
+    margin-top:
+      55px;
+  }
+
+
+  .garage__pc-visual {
+
+    aspect-ratio:
+      4 / 3;
+  }
+
+
+  .garage__pc-hud {
+
+    left:
+      12px;
+
+    right:
+      12px;
+
+    bottom:
+      12px;
+  }
+
+
+  .garage__pc-hud div {
+
+    padding:
+      8px;
+  }
+
+
+  .garage__pc-title {
+
+    font-size:
+      2.3rem;
+  }
+
+
+  .garage__pc-specs div {
+
+    flex-direction:
+      column;
+
+    gap:
+      4px;
+  }
+
+
+  .garage__footer {
+
+    margin-top:
+      50px;
+  }
+
+
+  .garage__grid-floor {
+
+    width:
+      250%;
+  }
+
+
+  .garage__red-track {
+
+    width:
+      220%;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .garage__grid-floor,
+  .garage__red-track,
+  .garage__particles,
+  .garage__machine-ring,
+  .garage__machine-glow,
+  .garage__status span,
+  .garage__bars i,
+  .garage__pc-scan {
+
+    animation:
+      none;
+  }
+}

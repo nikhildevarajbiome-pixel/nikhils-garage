@@ -1,0 +1,71 @@
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: radial-gradient(ellipse at 50% 40%, #0c1016 0%, #05070a 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 480ms ease, visibility 480ms ease;
+}
+
+.loading-screen--leave {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loading-screen__grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(225, 6, 0, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(225, 6, 0, 0.06) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(ellipse at 50% 50%, black 0%, transparent 72%);
+}
+
+.loading-screen__content {
+  position: relative;
+  text-align: center;
+  width: min(360px, 80vw);
+}
+
+.loading-screen__title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.6rem, 6vw, 2.2rem);
+  letter-spacing: 0.06em;
+  color: var(--color-white);
+  text-shadow: 0 0 24px rgba(225, 6, 0, 0.35);
+}
+
+.loading-screen__status {
+  margin-top: 10px;
+  font-family: var(--font-hud);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  color: var(--color-silver-dim);
+}
+
+.loading-screen__bar-track {
+  margin-top: 28px;
+  height: 3px;
+  width: 100%;
+  background: var(--color-line);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loading-screen__bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-red), var(--color-red-glow));
+  box-shadow: 0 0 10px var(--color-red);
+  transition: width 80ms linear;
+}
+
+.loading-screen__percent {
+  margin-top: 10px;
+  font-family: var(--font-hud);
+  font-size: 0.85rem;
+  color: var(--color-silver);
+  letter-spacing: 0.08em;
+}
