@@ -112,7 +112,7 @@ const personalData = {
     github: "https://github.com/",
     // CHANGE YOUR WHATSAPP NUMBER HERE — international format, digits only, no + or spaces
     // Example: "919876543210" for an Indian number
-    whatsappNumber: "REPLACE_WITH_YOUR_NUMBER",
+    whatsappNumber: "917760710682",
     whatsappMessage: "Hi Nikhil! I visited Nikhil's Garage and wanted to connect.",
   },
 
