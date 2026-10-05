@@ -1,6 +1,6 @@
 /* =========================================================
    HERO — NIKHIL'S GARAGE
-   Premium F1 / Motorsport Landing Section
+   Premium Cinematic Motorsport Landing
    ========================================================= */
 
 .hero {
@@ -15,6 +15,97 @@
 
   overflow: hidden;
   isolation: isolate;
+
+  background:
+    radial-gradient(
+      circle at 72% 38%,
+      rgba(225, 6, 0, 0.09),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 20% 55%,
+      rgba(45, 90, 180, 0.07),
+      transparent 30%
+    ),
+    #030405;
+}
+
+
+/* =========================================================
+   CINEMATIC ATMOSPHERE
+   ========================================================= */
+
+.hero::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  z-index: 0;
+
+  pointer-events: none;
+
+  opacity: 0.45;
+
+  background:
+    linear-gradient(
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px
+    );
+
+  background-size:
+    80px 80px;
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(0, 0, 0, 0.9) 35%,
+      black 100%
+    );
+}
+
+
+/* =========================================================
+   RED RACING LIGHT
+   ========================================================= */
+
+.hero::after {
+  content: "";
+
+  position: absolute;
+  inset: auto -10% 14% -10%;
+
+  height: 1px;
+
+  z-index: 2;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(225, 6, 0, 0.05) 12%,
+      rgba(225, 6, 0, 0.7) 50%,
+      rgba(225, 6, 0, 0.05) 88%,
+      transparent
+    );
+
+  box-shadow:
+    0 0 30px rgba(225, 6, 0, 0.3),
+    0 0 80px rgba(225, 6, 0, 0.12);
+
+  transform:
+    perspective(500px)
+    rotateX(60deg);
+
+  opacity: 0.65;
 }
 
 
@@ -35,6 +126,11 @@
   will-change: transform, opacity;
 
   pointer-events: auto;
+
+  filter:
+    drop-shadow(
+      0 35px 45px rgba(0, 0, 0, 0.45)
+    );
 }
 
 .hero__canvas-wrap canvas {
@@ -48,37 +144,13 @@
 
 
 /* =========================================================
-   DARK GRADIENT
-   ========================================================= */
-
-.hero::after {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
-  z-index: 1;
-
-  pointer-events: none;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.03) 0%,
-      rgba(0, 0, 0, 0.04) 42%,
-      rgba(0, 0, 0, 0.74) 100%
-    );
-}
-
-
-/* =========================================================
    HERO CONTENT
    ========================================================= */
 
 .hero__content {
   position: relative;
 
-  z-index: 3;
+  z-index: 4;
 
   pointer-events: none;
 
@@ -87,6 +159,8 @@
   max-width: 1250px;
 
   margin: 0 auto;
+
+  padding-bottom: 4px;
 }
 
 .hero__content > * {
@@ -95,7 +169,7 @@
 
 
 /* =========================================================
-   NIKHIL'S GARAGE — PREMIUM RED 3D
+   TITLE
    ========================================================= */
 
 .hero__title {
@@ -103,7 +177,7 @@
 
   margin: 16px 0 0;
 
-  max-width: 12ch;
+  max-width: 10ch;
 
   font-size: clamp(
     3.2rem,
@@ -111,11 +185,11 @@
     6.8rem
   );
 
-  line-height: 0.92;
+  line-height: 0.88;
 
   font-weight: 900;
 
-  letter-spacing: -0.045em;
+  letter-spacing: -0.055em;
 
   color: #f20d16;
 
@@ -125,9 +199,9 @@
     3px 3px 0 #85050a,
     4px 4px 0 #650307,
 
-    0 0 16px rgba(225, 6, 0, 0.35),
+    0 0 18px rgba(225, 6, 0, 0.28),
 
-    0 8px 30px rgba(0, 0, 0, 0.7);
+    0 12px 35px rgba(0, 0, 0, 0.85);
 
   transform:
     perspective(1000px)
@@ -136,7 +210,7 @@
 
 
 /* =========================================================
-   SMALL TOP HIGHLIGHT
+   TITLE HIGHLIGHT
    ========================================================= */
 
 .hero__title::before {
@@ -145,19 +219,20 @@
   position: absolute;
 
   left: 0;
-  top: 0;
+  top: -8px;
 
-  width: 48%;
-  height: 2px;
+  width: 55%;
+  height: 1px;
 
   background:
     linear-gradient(
       90deg,
       rgba(255, 80, 80, 0.9),
+      rgba(225, 6, 0, 0.25),
       transparent
     );
 
-  opacity: 0.7;
+  opacity: 0.8;
 
   pointer-events: none;
 }
@@ -187,7 +262,7 @@
   color: var(--color-silver);
 
   text-shadow:
-    0 4px 20px rgba(0, 0, 0, 0.8);
+    0 4px 22px rgba(0, 0, 0, 0.9);
 }
 
 
@@ -218,7 +293,7 @@
 }
 
 .hero__meta-divider {
-  width: 28px;
+  width: 34px;
 
   height: 1px;
 
@@ -230,7 +305,10 @@
       transparent
     );
 
-  opacity: 0.8;
+  opacity: 0.9;
+
+  box-shadow:
+    0 0 8px rgba(225, 6, 0, 0.5);
 }
 
 
@@ -247,24 +325,25 @@
 
   transform: translateX(-50%);
 
-  z-index: 4;
+  z-index: 5;
 
-  width: 24px;
+  width: 25px;
 
-  height: 40px;
+  height: 42px;
 
   border: 1px solid
-    rgba(255, 255, 255, 0.28);
+    rgba(255, 255, 255, 0.24);
 
   border-radius: 14px;
 
   background:
     rgba(255, 255, 255, 0.025);
 
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(7px);
 
   box-shadow:
-    0 0 20px rgba(0, 0, 0, 0.25);
+    0 0 25px rgba(0, 0, 0, 0.35),
+    inset 0 0 12px rgba(255, 255, 255, 0.02);
 }
 
 .hero__scroll-cue span {
@@ -285,8 +364,8 @@
   background: var(--color-red);
 
   box-shadow:
-    0 0 10px
-    rgba(225, 6, 0, 0.8);
+    0 0 10px rgba(225, 6, 0, 0.9),
+    0 0 20px rgba(225, 6, 0, 0.35);
 
   animation:
     scrollCue 1.8s ease-in-out infinite;
@@ -305,7 +384,7 @@
 
   70% {
     opacity: 0;
-    top: 22px;
+    top: 23px;
   }
 
   100% {
@@ -328,6 +407,23 @@
 
   .hero__title {
     max-width: 10ch;
+  }
+
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1500px) {
+
+  .hero__title {
+    font-size: 7rem;
+  }
+
+  .hero::before {
+    background-size: 100px 100px;
   }
 
 }
@@ -375,21 +471,33 @@
     padding-bottom: 70px;
   }
 
-  /*
-   * Brighter mobile 3D car.
-   * Desktop remains unchanged.
-   */
+  /* Keep mobile car bright */
   .hero__canvas-wrap {
     opacity: 0.92 !important;
+
+    filter:
+      drop-shadow(
+        0 25px 35px rgba(0, 0, 0, 0.5)
+      );
+  }
+
+  .hero::before {
+    opacity: 0.22;
+
+    background-size: 55px 55px;
   }
 
   .hero::after {
+    inset: auto -20% 17% -20%;
+
+    opacity: 0.45;
+
     background:
       linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0.08) 0%,
-        rgba(0, 0, 0, 0.2) 40%,
-        rgba(0, 0, 0, 0.85) 100%
+        90deg,
+        transparent,
+        rgba(225, 6, 0, 0.55),
+        transparent
       );
   }
 
@@ -408,6 +516,12 @@
     );
 
     line-height: 0.94;
+
+    letter-spacing: -0.05em;
+  }
+
+  .hero__title::before {
+    width: 62%;
   }
 
   .hero__tagline {

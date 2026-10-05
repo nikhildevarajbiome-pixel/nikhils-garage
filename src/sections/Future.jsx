@@ -225,7 +225,7 @@ export default function Future() {
                 </span>
 
                 <strong>
-                  NIKKE / 21
+                  NIKHIL / 21
                 </strong>
               </div>
 

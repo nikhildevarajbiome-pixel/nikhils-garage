@@ -12,7 +12,7 @@
 const personalData = {
   // ---------- IDENTITY ----------
   name: "Nikhil Devaraj",
-  nickname: "Nikke",
+  nickname: "Nikhil",
   age: 21,
   location: "Bengaluru, India",
   education: "Bachelor of Computer Applications (BCA)",
@@ -21,7 +21,7 @@ const personalData = {
 
   // ---------- ABOUT ----------
   aboutText: [
-    "My name is Nikhil Devaraj, but people can call me Nikke. I'm 21 and from Bengaluru, India.",
+    "My name is Nikhil Devaraj, but people can call me NIKHIL. I'm 21 and from Bengaluru, India.",
     "I completed my Bachelor of Computer Applications.",
     "Since childhood, I have been fascinated by anything with wheels, speed and machines.",
     "My interest started with Hot Wheels, RC cars and RC trucks. Over time, that curiosity grew into a passion for racing, F1 and motorsports.",

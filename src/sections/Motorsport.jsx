@@ -198,7 +198,7 @@ export default function Motorsport() {
             <div className="motorsport__hero-bottom">
 
               <span>
-                NIKKE / DRIVER INSPIRATION
+                NIKHIL / DRIVER INSPIRATION
               </span>
 
               <span className="motorsport__hero-line" />
@@ -444,7 +444,7 @@ export default function Motorsport() {
                 </span>
 
                 <span>
-                  DRIVER / NIKKE
+                  DRIVER / NIKHIL
                 </span>
 
               </div>

@@ -1,136 +1,145 @@
 /* =========================================================
-   MOTORSPORT — NIGHT RACE
-   ========================================================= */
+   NIKHIL'S GARAGE — F1 & MOTORSPORT
+   COMPACT PREMIUM VERSION
+========================================================= */
 
 .motorsport {
   position: relative;
-
-  min-height: 100svh;
-
-  padding-top:
-    clamp(130px, 13vw, 190px);
-
-  padding-bottom:
-    clamp(130px, 13vw, 190px);
-
+  padding: 100px 0 90px;
   overflow: hidden;
-
   isolation: isolate;
+  background:
+    radial-gradient(
+      circle at 10% 25%,
+      rgba(225, 6, 0, 0.08),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 90% 70%,
+      rgba(40, 80, 255, 0.06),
+      transparent 30%
+    ),
+    #030405;
 }
 
-
 /* =========================================================
-   AMBIENT BACKGROUND
-   ========================================================= */
+   BACKGROUND
+========================================================= */
 
 .motorsport__ambient {
   position: absolute;
-
   inset: 0;
-
-  z-index: -2;
-
+  z-index: -1;
   pointer-events: none;
-
   overflow: hidden;
 }
 
-
-/* =========================================================
-   ASPHALT
-   ========================================================= */
-
 .motorsport__asphalt {
   position: absolute;
-
   inset: 0;
-
   background:
     radial-gradient(
       ellipse at center,
-      rgba(30, 33, 38, 0.34),
-      rgba(3, 5, 8, 0.92) 70%
+      rgba(30, 33, 38, 0.3),
+      rgba(3, 5, 8, 0.95) 75%
     );
 }
 
+.motorsport__grid-lines {
+  position: absolute;
+  inset: 0;
+  opacity: 0.12;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.035) 1px,
+      transparent 1px
+    );
+
+  background-size: 70px 70px;
+
+  transform:
+    perspective(600px)
+    rotateX(55deg)
+    translateY(80px);
+
+  animation:
+    motorsportGrid 15s linear infinite;
+}
+
+@keyframes motorsportGrid {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 0 140px;
+  }
+}
 
 /* =========================================================
-   TRACK CURVE
-   ========================================================= */
+   TRACK
+========================================================= */
 
 .motorsport__track-track {
   position: absolute;
-
   width: 120%;
-  height: 70%;
-
+  height: 55%;
   left: -10%;
-  top: 18%;
+  top: 25%;
 
   border:
     1px solid
-    rgba(255, 255, 255, 0.055);
+    rgba(255,255,255,0.045);
 
-  border-radius:
-    50%;
+  border-radius: 50%;
 
-  transform:
-    rotate(-9deg);
+  transform: rotate(-9deg);
 
   box-shadow:
-    0 0 0 55px
-    rgba(255, 255, 255, 0.012),
-    0 0 0 56px
-    rgba(255, 255, 255, 0.025);
+    0 0 0 45px rgba(255,255,255,0.008);
 
-  opacity: 0.65;
+  opacity: 0.55;
 }
-
-
-/* =========================================================
-   RED RACING LINE
-   ========================================================= */
 
 .motorsport__track-line {
   position: absolute;
 
   width: 115%;
-  height: 45%;
+  height: 38%;
 
   left: -8%;
-  top: 30%;
+  top: 34%;
 
   border:
-    2px solid
-    transparent;
+    2px solid transparent;
 
   border-top-color:
-    rgba(225, 6, 0, 0.65);
+    rgba(225,6,0,0.65);
 
-  border-radius:
-    50%;
+  border-radius: 50%;
 
-  transform:
-    rotate(-10deg);
+  transform: rotate(-10deg);
 
   filter:
     drop-shadow(
-      0 0 12px
-      rgba(225, 6, 0, 0.5)
+      0 0 10px
+      rgba(225,6,0,0.5)
     );
 
-  opacity: 0.65;
-
   animation:
-    raceLinePulse 4s ease-in-out infinite;
+    raceLinePulse 3.5s ease-in-out infinite;
 }
 
-
 @keyframes raceLinePulse {
-
   0%,
   100% {
-    opacity: 0.3;
+    opacity: 0.25;
   }
 
   50% {
@@ -138,173 +147,114 @@
   }
 }
 
-
-/* =========================================================
-   RED GLOW
-   ========================================================= */
-
 .motorsport__track-glow {
-
   position: absolute;
 
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 400px;
 
-  right: -230px;
-  top: 20%;
+  right: -180px;
+  top: 25%;
 
   border-radius: 50%;
 
   background:
-    rgba(225, 6, 0, 0.08);
+    rgba(225,6,0,0.08);
 
-  filter:
-    blur(110px);
+  filter: blur(100px);
 
   animation:
-    motorsportGlow 12s ease-in-out infinite alternate;
+    motorsportGlow
+    10s
+    ease-in-out
+    infinite alternate;
 }
 
-
 @keyframes motorsportGlow {
-
   from {
-    transform:
-      translate3d(0, 0, 0)
-      scale(1);
+    transform: translate(0,0) scale(1);
   }
 
   to {
-    transform:
-      translate3d(-60px, 30px, 0)
-      scale(1.08);
+    transform: translate(-50px,30px) scale(1.1);
   }
 }
 
-
-/* =========================================================
-   DISTANT TRACK LIGHTS
-   ========================================================= */
-
 .motorsport__lights {
-
   position: absolute;
-
   left: 0;
   right: 0;
-
-  bottom: 22%;
+  bottom: 18%;
 
   height: 2px;
 
-  opacity: 0.35;
+  opacity: 0.3;
 
   background:
     repeating-linear-gradient(
       90deg,
       transparent 0,
       transparent 55px,
-      rgba(255, 255, 255, 0.55) 56px,
+      rgba(255,255,255,0.5) 56px,
       transparent 58px,
       transparent 130px
     );
 
-  filter:
-    blur(0.5px);
+  animation:
+    lightsMove
+    8s
+    linear
+    infinite;
 }
 
+@keyframes lightsMove {
+  from {
+    transform: translateX(0);
+  }
 
-/* =========================================================
-   TECHNICAL GRID
-   ========================================================= */
-
-.motorsport__grid-lines {
-
-  position: absolute;
-
-  inset: 0;
-
-  opacity: 0.15;
-
-  background-image:
-    linear-gradient(
-      rgba(255, 255, 255, 0.035) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.035) 1px,
-      transparent 1px
-    );
-
-  background-size:
-    80px 80px;
-
-  mask-image:
-    linear-gradient(
-      180deg,
-      transparent,
-      black 20%,
-      black 80%,
-      transparent
-    );
+  to {
+    transform: translateX(-130px);
+  }
 }
-
 
 /* =========================================================
    CONTAINER
-   ========================================================= */
+========================================================= */
 
 .motorsport__container {
   position: relative;
-
   z-index: 2;
 }
 
-
 /* =========================================================
    HEADER
-   ========================================================= */
+========================================================= */
 
 .motorsport__header {
-  max-width: 1000px;
+  max-width: 900px;
 }
 
-
 .motorsport__eyebrow {
-
   display: flex;
-
   align-items: center;
-
-  gap: 22px;
-
+  gap: 20px;
   flex-wrap: wrap;
 }
 
-
 .motorsport__status {
-
   display: inline-flex;
-
   align-items: center;
-
   gap: 8px;
 
-  font-family:
-    var(--font-hud);
-
-  font-size: 0.58rem;
-
+  font-family: var(--font-hud);
+  font-size: 0.55rem;
   letter-spacing: 0.16em;
 
   color:
-    rgba(255, 255, 255, 0.38);
+    rgba(255,255,255,0.38);
 }
 
-
 .motorsport__status-dot {
-
   width: 6px;
   height: 6px;
 
@@ -315,18 +265,19 @@
 
   box-shadow:
     0 0 12px
-    rgba(225, 6, 0, 0.9);
+    rgba(225,6,0,0.9);
 
   animation:
-    motorsportStatus 1.6s ease-in-out infinite;
+    motorsportStatus
+    1.5s
+    ease-in-out
+    infinite;
 }
 
-
 @keyframes motorsportStatus {
-
   0%,
   100% {
-    opacity: 0.45;
+    opacity: 0.35;
   }
 
   50% {
@@ -334,52 +285,33 @@
   }
 }
 
-
-/* =========================================================
-   HEADING
-   ========================================================= */
-
 .motorsport__heading-row {
-
-  margin-top: 18px;
-
   display: flex;
-
   align-items: flex-end;
-
   justify-content: space-between;
 
-  gap: 40px;
+  margin-top: 15px;
+
+  gap: 30px;
 }
 
-
 .motorsport__title {
-
   font-size:
-    clamp(3.8rem, 7vw, 7.2rem);
+    clamp(3rem, 6vw, 6rem);
 
   line-height: 0.88;
 
-  letter-spacing: -0.045em;
+  letter-spacing: -0.055em;
 
   text-shadow:
-    0 0 40px
-    rgba(225, 6, 0, 0.1),
-    0 20px 60px
-    rgba(0, 0, 0, 0.65);
+    0 0 35px rgba(225,6,0,0.08);
 }
 
-
 .motorsport__subtitle {
+  margin-top: 14px;
 
-  margin-top: 18px;
-
-  font-family:
-    var(--font-hud);
-
-  font-size: 0.62rem;
-
-  font-weight: 600;
+  font-family: var(--font-hud);
+  font-size: 0.58rem;
 
   letter-spacing: 0.2em;
 
@@ -387,137 +319,96 @@
     var(--color-red);
 }
 
-
-/* =========================================================
-   LAP NUMBER
-   ========================================================= */
-
 .motorsport__lap {
-
   display: flex;
-
   flex-direction: column;
-
   align-items: flex-end;
-
   gap: 3px;
 }
 
-
 .motorsport__lap span {
-
-  font-family:
-    var(--font-hud);
-
-  font-size: 0.5rem;
-
+  font-family: var(--font-hud);
+  font-size: 0.48rem;
   letter-spacing: 0.18em;
 
   color:
-    rgba(255, 255, 255, 0.25);
+    rgba(255,255,255,0.22);
 }
 
-
 .motorsport__lap strong {
-
-  font-family:
-    var(--font-display);
-
-  font-size: 3.5rem;
+  font-family: var(--font-display);
+  font-size: 3rem;
 
   line-height: 0.8;
 
-  letter-spacing: -0.05em;
-
   color:
-    rgba(255, 255, 255, 0.07);
+    rgba(255,255,255,0.07);
 }
 
-
 /* =========================================================
-   HERO CARD
-   ========================================================= */
+   HERO DRIVER IMAGE
+========================================================= */
 
 .motorsport__hero-card {
-
   position: relative;
 
-  margin-top: 65px;
+  margin-top: 45px;
 
   overflow: hidden;
 
   border:
     1px solid
-    rgba(255, 255, 255, 0.1);
+    rgba(255,255,255,0.09);
 
   border-top:
-    3px solid
+    2px solid
     var(--color-red);
 
-  border-radius: 12px;
+  border-radius: 10px;
 
   background:
-    rgba(8, 10, 14, 0.72);
-
-  backdrop-filter:
-    blur(12px);
+    rgba(8,10,14,0.75);
 
   box-shadow:
-    0 40px 100px
-    rgba(0, 0, 0, 0.45);
+    0 25px 70px
+    rgba(0,0,0,0.4);
 
   transition:
     transform 0.45s ease,
     box-shadow 0.45s ease;
 }
 
-
 .motorsport__hero-card:hover {
-
   transform:
-    translateY(-7px);
+    translateY(-5px);
 
   box-shadow:
-    0 50px 120px
-    rgba(0, 0, 0, 0.58),
-    0 0 55px
-    rgba(225, 6, 0, 0.045);
+    0 35px 90px
+    rgba(0,0,0,0.55),
+    0 0 35px
+    rgba(225,6,0,0.05);
 }
-
-
-/* =========================================================
-   HERO IMAGE
-   ========================================================= */
 
 .motorsport__hero-image {
-
   position: relative;
 
-  width: 100%;
-
   height:
-    clamp(380px, 54vw, 650px);
+    clamp(300px, 42vw, 500px);
 
   overflow: hidden;
-
-  background:
-    #080a0d;
 }
 
-
 .motorsport__hero-image img {
-
-  display: block;
-
   width: 100%;
   height: 100%;
 
+  display: block;
+
   object-fit: cover;
 
-  object-position: center;
-
   transition:
-    transform 0.9s cubic-bezier(
+    transform 0.8s
+    cubic-bezier(
       0.16,
       1,
       0.3,
@@ -525,95 +416,70 @@
     );
 }
 
-
 .motorsport__hero-card:hover
 .motorsport__hero-image img {
-
   transform:
-    scale(1.025);
+    scale(1.035);
 }
 
-
-/* =========================================================
-   IMAGE OVERLAY
-   ========================================================= */
-
 .motorsport__image-overlay {
-
   position: absolute;
-
   inset: 0;
-
-  z-index: 2;
 
   pointer-events: none;
 
   background:
     linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0.04),
+      rgba(0,0,0,0.02),
       transparent 45%,
-      rgba(0, 0, 0, 0.55)
+      rgba(0,0,0,0.65)
     );
 }
 
-
-/* =========================================================
-   IMAGE CODE
-   ========================================================= */
-
 .motorsport__image-code {
-
   position: absolute;
 
-  z-index: 4;
+  z-index: 3;
 
-  top: 18px;
-  left: 18px;
+  top: 15px;
+  left: 15px;
 
-  padding:
-    7px 10px;
+  padding: 6px 9px;
 
-  font-family:
-    var(--font-hud);
-
-  font-size: 0.52rem;
+  font-family: var(--font-hud);
+  font-size: 0.48rem;
 
   letter-spacing: 0.15em;
 
   color:
-    rgba(255, 255, 255, 0.68);
+    rgba(255,255,255,0.65);
 
   background:
-    rgba(0, 0, 0, 0.35);
+    rgba(0,0,0,0.35);
 
   border:
     1px solid
-    rgba(255, 255, 255, 0.12);
+    rgba(255,255,255,0.1);
 
   backdrop-filter:
-    blur(7px);
+    blur(6px);
 }
-
 
 /* =========================================================
    IMAGE CORNERS
-   ========================================================= */
+========================================================= */
 
 .motorsport__image-corner {
-
   position: absolute;
+  z-index: 3;
 
-  z-index: 4;
-
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
 }
-
 
 .motorsport__image-corner::before,
 .motorsport__image-corner::after {
-
   content: "";
 
   position: absolute;
@@ -622,89 +488,63 @@
     var(--color-red);
 
   box-shadow:
-    0 0 8px
-    rgba(225, 6, 0, 0.55);
+    0 0 7px
+    rgba(225,6,0,0.5);
 }
 
-
 .motorsport__image-corner::before {
-
-  width: 30px;
+  width: 24px;
   height: 1px;
 }
 
-
 .motorsport__image-corner::after {
-
   width: 1px;
-  height: 30px;
+  height: 24px;
 }
-
 
 .motorsport__image-corner.tl {
-
-  top: 12px;
-  left: 12px;
+  top: 10px;
+  left: 10px;
 }
-
 
 .motorsport__image-corner.tr {
-
-  top: 12px;
-  right: 12px;
-
-  transform:
-    rotate(90deg);
+  top: 10px;
+  right: 10px;
+  transform: rotate(90deg);
 }
-
 
 .motorsport__image-corner.bl {
-
-  bottom: 12px;
-  left: 12px;
-
-  transform:
-    rotate(-90deg);
+  bottom: 10px;
+  left: 10px;
+  transform: rotate(-90deg);
 }
-
 
 .motorsport__image-corner.br {
-
-  bottom: 12px;
-  right: 12px;
-
-  transform:
-    rotate(180deg);
+  bottom: 10px;
+  right: 10px;
+  transform: rotate(180deg);
 }
-
 
 /* =========================================================
    HERO INFO
-   ========================================================= */
+========================================================= */
 
 .motorsport__hero-info {
-
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
 
-  gap: 30px;
+  gap: 25px;
 
   padding:
-    25px 28px;
+    20px 24px;
 }
 
-
 .motorsport__hero-label {
-
   display: block;
 
-  font-family:
-    var(--font-hud);
-
-  font-size: 0.56rem;
+  font-family: var(--font-hud);
+  font-size: 0.52rem;
 
   letter-spacing: 0.18em;
 
@@ -712,54 +552,40 @@
     var(--color-silver-dim);
 }
 
-
 .motorsport__hero-info h3 {
+  margin-top: 6px;
 
-  margin-top: 7px;
-
-  font-family:
-    var(--font-display);
+  font-family: var(--font-display);
 
   font-size:
-    clamp(1.6rem, 3vw, 2.4rem);
+    clamp(1.5rem, 2.8vw, 2.2rem);
 
   color:
     var(--color-white);
 }
 
-
 .motorsport__hero-team {
-
   display: flex;
-
   flex-direction: column;
-
   align-items: flex-end;
 
-  gap: 5px;
+  gap: 4px;
 }
 
-
 .motorsport__hero-team span {
-
-  font-family:
-    var(--font-hud);
-
-  font-size: 0.5rem;
+  font-family: var(--font-hud);
+  font-size: 0.46rem;
 
   letter-spacing: 0.16em;
 
   color:
-    rgba(255, 255, 255, 0.25);
+    rgba(255,255,255,0.22);
 }
 
-
 .motorsport__hero-team strong {
+  font-family: var(--font-hud);
 
-  font-family:
-    var(--font-hud);
-
-  font-size: 0.8rem;
+  font-size: 0.72rem;
 
   letter-spacing: 0.1em;
 
@@ -767,40 +593,30 @@
     var(--color-red);
 }
 
-
-/* =========================================================
-   HERO BOTTOM
-   ========================================================= */
-
 .motorsport__hero-bottom {
-
   display: flex;
-
   align-items: center;
 
-  gap: 12px;
+  gap: 10px;
 
   padding:
-    14px 28px;
+    11px 24px;
 
   border-top:
     1px solid
-    rgba(255, 255, 255, 0.07);
+    rgba(255,255,255,0.06);
 
-  font-family:
-    var(--font-hud);
+  font-family: var(--font-hud);
 
-  font-size: 0.48rem;
+  font-size: 0.44rem;
 
   letter-spacing: 0.16em;
 
   color:
-    rgba(255, 255, 255, 0.25);
+    rgba(255,255,255,0.22);
 }
 
-
 .motorsport__hero-line {
-
   flex: 1;
 
   height: 1px;
@@ -813,151 +629,125 @@
     );
 }
 
-
 /* =========================================================
    IMAGE GALLERY
-   ========================================================= */
+========================================================= */
 
 .motorsport__gallery {
-
-  margin-top: 18px;
+  margin-top: 15px;
 
   display: grid;
 
   grid-template-columns:
     1fr 1fr;
 
-  gap: 18px;
+  gap: 15px;
 }
 
-
-/* =========================================================
-   GALLERY CARD
-   ========================================================= */
-
 .motorsport__gallery-card {
-
   position: relative;
 
   overflow: hidden;
 
   border:
     1px solid
-    rgba(255, 255, 255, 0.09);
+    rgba(255,255,255,0.08);
 
-  border-radius: 10px;
+  border-radius: 8px;
 
   background:
-    rgba(10, 12, 16, 0.72);
-
-  box-shadow:
-    0 25px 65px
-    rgba(0, 0, 0, 0.3);
+    rgba(10,12,16,0.7);
 
   transition:
     transform 0.4s ease,
-    border-color 0.4s ease;
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
 }
-
 
 .motorsport__gallery-card:hover {
-
   transform:
-    translateY(-7px);
+    translateY(-5px);
 
   border-color:
-    rgba(225, 6, 0, 0.3);
+    rgba(225,6,0,0.3);
+
+  box-shadow:
+    0 20px 55px
+    rgba(0,0,0,0.4);
 }
 
-
-/* =========================================================
-   GALLERY IMAGE
-   ========================================================= */
-
 .motorsport__gallery-image {
-
   position: relative;
 
   height:
-    clamp(250px, 30vw, 390px);
+    clamp(200px, 25vw, 320px);
 
   overflow: hidden;
 }
 
-
 .motorsport__gallery-image img {
-
   width: 100%;
   height: 100%;
 
-  display: block;
-
   object-fit: cover;
 
-  transition:
-    transform 0.7s ease;
-}
+  display: block;
 
+  transition:
+    transform 0.7s
+    cubic-bezier(
+      0.16,
+      1,
+      0.3,
+      1
+    );
+}
 
 .motorsport__gallery-card:hover
 .motorsport__gallery-image img {
-
   transform:
-    scale(1.04);
+    scale(1.05);
 }
 
-
 .motorsport__gallery-code {
-
   position: absolute;
 
-  top: 15px;
-  left: 15px;
+  top: 12px;
+  left: 12px;
 
-  z-index: 4;
+  z-index: 3;
 
-  padding:
-    6px 9px;
+  padding: 5px 8px;
 
-  font-family:
-    var(--font-hud);
+  font-family: var(--font-hud);
 
-  font-size: 0.5rem;
+  font-size: 0.44rem;
 
-  letter-spacing: 0.15em;
+  letter-spacing: 0.14em;
 
   color:
-    rgba(255, 255, 255, 0.6);
+    rgba(255,255,255,0.6);
 
   background:
-    rgba(0, 0, 0, 0.32);
+    rgba(0,0,0,0.35);
 
   border:
     1px solid
-    rgba(255, 255, 255, 0.1);
+    rgba(255,255,255,0.1);
 
   backdrop-filter:
     blur(6px);
 }
 
-
-/* =========================================================
-   GALLERY INFO
-   ========================================================= */
-
 .motorsport__gallery-info {
-
   padding:
-    22px 24px 25px;
+    18px 20px 20px;
 }
 
-
 .motorsport__gallery-info > span {
+  font-family: var(--font-hud);
 
-  font-family:
-    var(--font-hud);
-
-  font-size: 0.54rem;
+  font-size: 0.48rem;
 
   letter-spacing: 0.17em;
 
@@ -965,120 +755,105 @@
     var(--color-red);
 }
 
-
 .motorsport__gallery-info h3 {
+  margin-top: 5px;
 
-  margin-top: 7px;
-
-  font-family:
-    var(--font-display);
+  font-family: var(--font-display);
 
   font-size:
-    clamp(1.45rem, 2.4vw, 2rem);
+    clamp(1.3rem, 2.2vw, 1.8rem);
 
   color:
     var(--color-white);
 }
 
-
 .motorsport__gallery-info p {
-
-  margin-top: 9px;
+  margin-top: 7px;
 
   color:
     var(--color-silver);
 
-  font-size: 0.9rem;
+  font-size: 0.78rem;
 
-  line-height: 1.6;
+  line-height: 1.5;
 }
-
 
 /* =========================================================
    FACTS
-   ========================================================= */
+========================================================= */
 
 .motorsport__facts {
-
-  margin-top: 18px;
+  margin-top: 15px;
 
   display: grid;
 
   grid-template-columns:
     1fr 1fr;
 
-  gap: 18px;
+  gap: 15px;
 }
 
-
 .motorsport__fact {
+  min-height: 145px;
 
-  min-height: 190px;
-
-  padding:
-    25px;
+  padding: 20px;
 
   border:
     1px solid
-    rgba(255, 255, 255, 0.08);
+    rgba(255,255,255,0.07);
 
-  border-radius: 9px;
+  border-radius: 8px;
 
   background:
-    rgba(10, 12, 16, 0.55);
+    rgba(10,12,16,0.5);
 
   backdrop-filter:
     blur(10px);
 
   transition:
     transform 0.35s ease,
-    border-color 0.35s ease;
+    border-color 0.35s ease,
+    background 0.35s ease;
 }
-
 
 .motorsport__fact:hover {
-
   transform:
-    translateY(-5px);
+    translateY(-4px);
 
   border-color:
-    rgba(225, 6, 0, 0.3);
+    rgba(225,6,0,0.3);
+
+  background:
+    rgba(225,6,0,0.025);
 }
 
-
 .motorsport__fact h3 {
+  margin-top: 15px;
 
-  margin-top: 20px;
-
-  font-family:
-    var(--font-display);
+  font-family: var(--font-display);
 
   font-size:
-    clamp(1.4rem, 2.5vw, 2rem);
+    clamp(1.3rem, 2.2vw, 1.8rem);
 
   color:
     var(--color-white);
 }
 
-
 .motorsport__fact > p {
-
-  margin-top: 12px;
+  margin-top: 8px;
 
   color:
     var(--color-silver);
 
-  line-height: 1.65;
+  line-height: 1.5;
+
+  font-size: 0.8rem;
 }
 
-
 .motorsport__dream {
+  font-family: var(--font-hud);
 
-  font-family:
-    var(--font-hud);
-
-  font-size:
-    1rem;
+  font-size: 0.9rem;
 
   font-weight: 600;
 
@@ -1086,112 +861,112 @@
     var(--color-white) !important;
 }
 
-
 /* =========================================================
    TAGS
-   ========================================================= */
+========================================================= */
 
 .motorsport__tags {
-
-  margin-top: 28px;
+  margin-top: 20px;
 
   display: flex;
-
   flex-wrap: wrap;
 
-  gap: 9px;
+  gap: 7px;
 }
 
-
 .motorsport__tag {
-
   padding:
-    8px 14px;
+    6px 11px;
 
-  font-family:
-    var(--font-hud);
+  font-family: var(--font-hud);
 
-  font-size:
-    0.7rem;
+  font-size: 0.62rem;
 
-  letter-spacing:
-    0.08em;
+  letter-spacing: 0.08em;
 
   color:
     var(--color-silver);
 
   border:
     1px solid
-    rgba(255, 255, 255, 0.09);
+    rgba(255,255,255,0.08);
 
-  border-radius:
-    30px;
+  border-radius: 20px;
 
   background:
-    rgba(255, 255, 255, 0.025);
+    rgba(255,255,255,0.02);
 
   transition:
     color 0.25s ease,
     border-color 0.25s ease,
+    transform 0.25s ease,
     background 0.25s ease;
 }
 
-
 .motorsport__tag:hover {
-
   color:
     var(--color-white);
 
   border-color:
-    rgba(225, 6, 0, 0.4);
+    rgba(225,6,0,0.4);
 
   background:
-    rgba(225, 6, 0, 0.045);
-}
+    rgba(225,6,0,0.04);
 
+  transform:
+    translateY(-2px);
+}
 
 /* =========================================================
    GO KARTING
-   ========================================================= */
+========================================================= */
 
 .motorsport__kart {
-
   position: relative;
 
-  margin-top: 60px;
+  margin-top: 35px;
 
   min-height:
-    clamp(380px, 45vw, 540px);
+    clamp(280px, 34vw, 420px);
 
   overflow: hidden;
 
   display: flex;
-
   align-items: center;
 
   border:
     1px solid
-    rgba(255, 255, 255, 0.1);
+    rgba(255,255,255,0.09);
 
   border-left:
-    3px solid
+    2px solid
     var(--color-red);
 
-  border-radius: 10px;
+  border-radius: 9px;
 
   background:
-    rgba(7, 9, 12, 0.8);
+    rgba(7,9,12,0.8);
 
   box-shadow:
-    0 35px 90px
-    rgba(0, 0, 0, 0.4);
+    0 25px 65px
+    rgba(0,0,0,0.4);
+
+  transition:
+    box-shadow 0.4s ease,
+    transform 0.4s ease;
 }
 
+.motorsport__kart:hover {
+  transform:
+    translateY(-4px);
+
+  box-shadow:
+    0 35px 80px
+    rgba(0,0,0,0.5);
+}
 
 .motorsport__kart-background {
-
   position: absolute;
-
   inset: 0;
 
   background-position:
@@ -1204,190 +979,168 @@
     no-repeat;
 
   filter:
-    saturate(0.7)
+    saturate(0.75)
     contrast(1.05);
 
   opacity:
-    0.48;
+    0.45;
 
   transition:
     transform 0.8s ease;
 }
 
-
 .motorsport__kart:hover
 .motorsport__kart-background {
-
   transform:
-    scale(1.035);
+    scale(1.04);
 }
 
-
 .motorsport__kart-overlay {
-
   position: absolute;
-
   inset: 0;
 
   background:
     linear-gradient(
       90deg,
-      rgba(4, 6, 9, 0.96),
-      rgba(4, 6, 9, 0.72) 48%,
-      rgba(4, 6, 9, 0.35)
+      rgba(4,6,9,0.95),
+      rgba(4,6,9,0.7) 52%,
+      rgba(4,6,9,0.3)
     );
 }
 
-
 .motorsport__kart-track-line {
-
   position: absolute;
 
-  width: 70%;
+  width: 60%;
+  height: 170%;
 
-  height: 180%;
-
-  right: -15%;
-
-  top: -40%;
+  right: -12%;
+  top: -35%;
 
   border:
     2px solid
-    rgba(225, 6, 0, 0.4);
+    rgba(225,6,0,0.35);
 
-  border-radius:
-    50%;
+  border-radius: 50%;
 
   transform:
     rotate(-15deg);
 
   filter:
     drop-shadow(
-      0 0 12px
-      rgba(225, 6, 0, 0.35)
+      0 0 10px
+      rgba(225,6,0,0.3)
     );
+
+  animation:
+    kartLine 5s ease-in-out infinite alternate;
 }
 
+@keyframes kartLine {
+  from {
+    transform:
+      rotate(-15deg)
+      translateX(0);
+  }
+
+  to {
+    transform:
+      rotate(-15deg)
+      translateX(-20px);
+  }
+}
 
 .motorsport__kart-content {
-
   position: relative;
-
   z-index: 2;
 
-  max-width: 650px;
+  max-width: 600px;
 
   padding:
-    clamp(30px, 6vw, 70px);
+    clamp(28px, 5vw, 55px);
 }
 
-
 .motorsport__kart-title {
+  margin-top: 10px;
 
-  margin-top: 13px;
-
-  font-family:
-    var(--font-display);
+  font-family: var(--font-display);
 
   font-size:
-    clamp(2rem, 4vw, 3.5rem);
+    clamp(2rem, 4vw, 3.2rem);
 
-  line-height:
-    0.95;
+  line-height: 0.95;
 
   color:
     var(--color-white);
 }
 
-
 .motorsport__kart-venue {
-
-  margin-top: 12px;
+  margin-top: 10px;
 
   color:
     var(--color-silver);
 
-  font-family:
-    var(--font-hud);
+  font-family: var(--font-hud);
 
-  font-size:
-    0.8rem;
+  font-size: 0.72rem;
 
-  letter-spacing:
-    0.08em;
+  letter-spacing: 0.08em;
 }
-
 
 .motorsport__kart-meta {
-
-  margin-top: 28px;
+  margin-top: 20px;
 
   display: flex;
-
   flex-wrap: wrap;
 
-  gap: 20px;
+  gap: 15px;
 
-  font-family:
-    var(--font-hud);
+  font-family: var(--font-hud);
 
-  font-size:
-    0.52rem;
-
-  letter-spacing:
-    0.16em;
-
-  color:
-    rgba(255, 255, 255, 0.38);
-}
-
-
-.motorsport__kart-content .btn {
-
-  margin-top: 28px;
-}
-
-
-/* =========================================================
-   BOTTOM TELEMETRY
-   ========================================================= */
-
-.motorsport__telemetry {
-
-  margin-top: 28px;
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 13px;
-
-  font-family:
-    var(--font-hud);
-
-  font-size: 0.5rem;
+  font-size: 0.48rem;
 
   letter-spacing: 0.15em;
 
   color:
-    rgba(255, 255, 255, 0.25);
+    rgba(255,255,255,0.35);
 }
 
+.motorsport__kart-content .btn {
+  margin-top: 22px;
+}
 
-.motorsport__telemetry-bars {
+/* =========================================================
+   TELEMETRY
+========================================================= */
+
+.motorsport__telemetry {
+  margin-top: 20px;
 
   display: flex;
+  align-items: center;
 
+  gap: 11px;
+
+  font-family: var(--font-hud);
+
+  font-size: 0.45rem;
+
+  letter-spacing: 0.15em;
+
+  color:
+    rgba(255,255,255,0.22);
+}
+
+.motorsport__telemetry-bars {
+  display: flex;
   align-items: flex-end;
 
   gap: 3px;
 
-  height: 14px;
+  height: 13px;
 }
 
-
 .motorsport__telemetry-bars i {
-
   display: block;
 
   width: 3px;
@@ -1397,12 +1150,14 @@
 
   box-shadow:
     0 0 5px
-    rgba(225, 6, 0, 0.45);
+    rgba(225,6,0,0.45);
 
   animation:
-    telemetryBars 1s ease-in-out infinite alternate;
+    telemetryBars
+    0.8s
+    ease-in-out
+    infinite alternate;
 }
-
 
 .motorsport__telemetry-bars i:nth-child(1) {
   height: 4px;
@@ -1438,21 +1193,19 @@
   animation-delay: 0.6s;
 }
 
-
 @keyframes telemetryBars {
-
   from {
-    opacity: 0.35;
+    opacity: 0.3;
+    transform: scaleY(0.65);
   }
 
   to {
     opacity: 1;
+    transform: scaleY(1);
   }
 }
 
-
 .motorsport__telemetry-line {
-
   flex: 1;
 
   height: 1px;
@@ -1460,268 +1213,141 @@
   background:
     linear-gradient(
       90deg,
-      rgba(225, 6, 0, 0.5),
+      rgba(225,6,0,0.5),
       transparent
     );
 }
 
-
-/* =========================================================
-   TABLET
-   ========================================================= */
-
-@media (max-width: 900px) {
-
-  .motorsport__gallery {
-
-    grid-template-columns:
-      1fr 1fr;
-  }
-
-
-  .motorsport__facts {
-
-    grid-template-columns:
-      1fr 1fr;
-  }
-
-
-  .motorsport__hero-image {
-
-    height:
-      480px;
-  }
-}
-
-
 /* =========================================================
    MOBILE
-   ========================================================= */
+========================================================= */
 
-@media (max-width: 620px) {
-
+@media (max-width: 700px) {
   .motorsport {
-
-    min-height: auto;
-
-    padding-top:
-      100px;
-
-    padding-bottom:
-      100px;
+    padding:
+      80px
+      0
+      75px;
   }
-
 
   .motorsport__heading-row {
-
-    align-items:
-      flex-start;
+    align-items: flex-start;
   }
-
 
   .motorsport__lap {
-
-    display:
-      none;
+    display: none;
   }
-
 
   .motorsport__title {
-
     font-size:
-      3.5rem;
+      clamp(2.8rem, 13vw, 4rem);
   }
-
 
   .motorsport__subtitle {
-
-    font-size:
-      0.52rem;
-
-    line-height:
-      1.5;
+    font-size: 0.5rem;
   }
-
 
   .motorsport__hero-card {
-
-    margin-top:
-      48px;
+    margin-top: 35px;
   }
-
 
   .motorsport__hero-image {
-
-    height:
-      330px;
+    height: 290px;
   }
-
 
   .motorsport__hero-info {
-
-    flex-direction:
-      column;
-
-    align-items:
-      flex-start;
+    flex-direction: column;
+    align-items: flex-start;
 
     padding:
-      20px;
+      18px 20px;
   }
-
 
   .motorsport__hero-team {
-
-    align-items:
-      flex-start;
+    align-items: flex-start;
   }
-
-
-  .motorsport__hero-bottom {
-
-    padding:
-      12px 20px;
-
-    font-size:
-      0.42rem;
-  }
-
 
   .motorsport__gallery {
-
-    grid-template-columns:
-      1fr;
-
-    gap:
-      14px;
+    grid-template-columns: 1fr;
   }
-
 
   .motorsport__gallery-image {
-
-    height:
-      260px;
+    height: 245px;
   }
-
 
   .motorsport__facts {
-
-    grid-template-columns:
-      1fr;
+    grid-template-columns: 1fr;
   }
-
 
   .motorsport__fact {
-
-    min-height:
-      160px;
+    min-height: 130px;
   }
-
 
   .motorsport__kart {
-
-    min-height:
-      430px;
-
-    margin-top:
-      50px;
+    min-height: 390px;
+    margin-top: 30px;
   }
 
-
   .motorsport__kart-overlay {
-
     background:
       linear-gradient(
         180deg,
-        rgba(4, 6, 9, 0.78),
-        rgba(4, 6, 9, 0.94)
+        rgba(4,6,9,0.72),
+        rgba(4,6,9,0.95)
       );
   }
 
-
   .motorsport__kart-content {
-
     padding:
-      28px 24px;
+      25px 20px;
   }
-
 
   .motorsport__kart-title {
-
-    font-size:
-      2.2rem;
+    font-size: 2.1rem;
   }
-
-
-  .motorsport__kart-meta {
-
-    gap:
-      12px;
-  }
-
 
   .motorsport__telemetry {
-
-    flex-wrap:
-      wrap;
-
-    line-height:
-      1.6;
+    flex-wrap: wrap;
+    line-height: 1.6;
   }
-
 
   .motorsport__telemetry-line {
-
-    min-width:
-      70px;
+    min-width: 60px;
   }
-
 
   .motorsport__track-track {
-
-    width:
-      180%;
-
-    left:
-      -40%;
+    width: 180%;
+    left: -40%;
   }
 
-
   .motorsport__track-line {
-
-    width:
-      180%;
-
-    left:
-      -40%;
+    width: 180%;
+    left: -40%;
   }
 }
 
-
 /* =========================================================
    REDUCED MOTION
-   ========================================================= */
+========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-
+  .motorsport__grid-lines,
   .motorsport__track-line,
   .motorsport__track-glow,
+  .motorsport__lights,
   .motorsport__status-dot,
+  .motorsport__kart-track-line,
   .motorsport__telemetry-bars i {
-
-    animation:
-      none;
+    animation: none;
   }
-
 
   .motorsport__hero-card,
   .motorsport__gallery-card,
   .motorsport__fact,
+  .motorsport__kart,
   .motorsport__hero-image img,
   .motorsport__gallery-image img,
   .motorsport__kart-background {
-
-    transition:
-      none;
+    transition: none;
   }
 }

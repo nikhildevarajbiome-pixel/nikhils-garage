@@ -53,7 +53,7 @@ function GarageCard({ item, index, kind }) {
         <div className="garage__card-bottom">
 
           <span>
-            NIKKE / GARAGE
+            NIKHIL / GARAGE
           </span>
 
           <span className="garage__card-line" />
@@ -467,7 +467,7 @@ export default function Garage() {
           <div className="garage__footer">
 
             <span>
-              NIKKE'S PRIVATE GARAGE
+              NIKHIL'S PRIVATE GARAGE
             </span>
 
             <span className="garage__footer-line" />

@@ -202,7 +202,7 @@ export default function Memories() {
           </span>
 
           <span>
-            NIKKE / 05
+            NIKHIL / 05
           </span>
 
         </div>

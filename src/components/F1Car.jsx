@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
@@ -10,33 +10,22 @@ function MercedesModel({ hovered }) {
 
   const [modelScale, setModelScale] = useState(1);
 
-  // --------------------------------
-  // DRAG ROTATION STATE
-  // --------------------------------
-
   const isDragging = useRef(false);
   const lastPointerX = useRef(0);
   const targetRotationY = useRef(0);
-
-  // --------------------------------
-  // PREPARE MODEL
-  // --------------------------------
 
   useEffect(() => {
     if (!scene) return;
 
     const box = new THREE.Box3().setFromObject(scene);
-
     const size = new THREE.Vector3();
     const center = new THREE.Vector3();
 
     box.getSize(size);
     box.getCenter(center);
 
-    // Center model
     scene.position.sub(center);
 
-    // Calculate scale
     const maxDimension = Math.max(
       size.x,
       size.y,
@@ -44,112 +33,81 @@ function MercedesModel({ hovered }) {
     );
 
     if (maxDimension > 0) {
-      const targetSize = 5.0;
-
-      setModelScale(
-        targetSize / maxDimension
-      );
+      setModelScale(5.0 / maxDimension);
     }
 
-    // Enable shadows
     scene.traverse((object) => {
-      if (object.isMesh) {
-        object.castShadow = true;
-        object.receiveShadow = true;
+      if (!object.isMesh) return;
 
-        if (object.material) {
-          object.material.needsUpdate = true;
-        }
+      object.castShadow = true;
+      object.receiveShadow = true;
+
+      if (object.material) {
+        object.material.needsUpdate = true;
       }
     });
   }, [scene]);
 
-  // --------------------------------
-  // POINTER DOWN
-  // --------------------------------
-
   const handlePointerDown = (event) => {
     isDragging.current = true;
-
-    lastPointerX.current =
-      event.clientX ?? event.touches?.[0]?.clientX ?? 0;
+    lastPointerX.current = event.clientX ?? 0;
+    event.stopPropagation();
   };
-
-  // --------------------------------
-  // POINTER MOVE
-  // --------------------------------
 
   const handlePointerMove = (event) => {
     if (!isDragging.current) return;
 
-    const currentX =
-      event.clientX ??
-      event.touches?.[0]?.clientX ??
-      0;
-
-    const deltaX =
-      currentX - lastPointerX.current;
+    const currentX = event.clientX ?? 0;
+    const deltaX = currentX - lastPointerX.current;
 
     lastPointerX.current = currentX;
 
-    // Drag sensitivity
-    targetRotationY.current +=
-      deltaX * 0.012;
+    targetRotationY.current += deltaX * 0.012;
+
+    event.stopPropagation();
   };
 
-  // --------------------------------
-  // POINTER UP
-  // --------------------------------
+  const handlePointerUp = (event) => {
+    isDragging.current = false;
+    event.stopPropagation();
+  };
 
-  const handlePointerUp = () => {
+  const handlePointerCancel = () => {
     isDragging.current = false;
   };
-
-  // --------------------------------
-  // POINTER LEAVE
-  // --------------------------------
 
   const handlePointerLeave = () => {
     isDragging.current = false;
   };
-
-  // --------------------------------
-  // FRAME ANIMATION
-  // --------------------------------
 
   useFrame(({ clock }) => {
     if (!group.current) return;
 
     const t = clock.getElapsedTime();
 
-    // --------------------------------
-    // SMOOTH DRAG ROTATION
-    // --------------------------------
-
-    group.current.rotation.y =
-      THREE.MathUtils.lerp(
-        group.current.rotation.y,
+    // Slowly return to the normal position
+    if (!isDragging.current) {
+      targetRotationY.current = THREE.MathUtils.lerp(
         targetRotationY.current,
-        0.12
+        0,
+        0.018
       );
+    }
 
-    // --------------------------------
-    // FLOATING ANIMATION
-    // --------------------------------
+    // Smooth rotation
+    group.current.rotation.y = THREE.MathUtils.lerp(
+      group.current.rotation.y,
+      targetRotationY.current,
+      0.12
+    );
 
+    // Floating animation
     group.current.position.y =
-      1.0 +
-      Math.sin(t * 1.2) * 0.08;
+      1.0 + Math.sin(t * 1.2) * 0.08;
 
-    // --------------------------------
-    // HOVER SCALE
-    // --------------------------------
-
-    const targetScale =
-      hovered ? 1.05 : 1;
-
-    const finalScale =
-      modelScale * targetScale;
+    // Hover scale
+    const targetScale = hovered ? 1.05 : 1;
+    const finalScale = modelScale * targetScale;
 
     group.current.scale.lerp(
       new THREE.Vector3(
@@ -167,7 +125,7 @@ function MercedesModel({ hovered }) {
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
-      onPointerCancel={handlePointerUp}
+      onPointerCancel={handlePointerCancel}
       onPointerLeave={handlePointerLeave}
     >
       <primitive
@@ -178,49 +136,10 @@ function MercedesModel({ hovered }) {
   );
 }
 
-
-// --------------------------------
-// FALLBACK WHILE MODEL LOADS
-// --------------------------------
-
-function FallbackCar() {
+export default function F1Car({ hovered = false }) {
   return (
-    <mesh>
-      <boxGeometry
-        args={[3, 0.5, 1]}
-      />
-
-      <meshStandardMaterial
-        color="#c40500"
-      />
-    </mesh>
+    <MercedesModel hovered={hovered} />
   );
 }
 
-
-// --------------------------------
-// MAIN F1 CAR COMPONENT
-// --------------------------------
-
-export default function F1Car({
-  hovered = false
-}) {
-  return (
-    <Suspense
-      fallback={<FallbackCar />}
-    >
-      <MercedesModel
-        hovered={hovered}
-      />
-    </Suspense>
-  );
-}
-
-
-// --------------------------------
-// PRELOAD MODEL
-// --------------------------------
-
-useGLTF.preload(
-  "/models/mercedes-w13.glb"
-);
+useGLTF.preload("/models/mercedes-w13.glb");

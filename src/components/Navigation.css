@@ -1,6 +1,6 @@
 /* =========================================================
    NIKHIL'S GARAGE — NAVIGATION
-   Transparent Premium Space / Motorsport Header
+   Premium Motorsport / Space Navigation
    ========================================================= */
 
 .nav {
@@ -14,38 +14,79 @@
 
   padding-top: var(--safe-top);
 
-  /* Very transparent so stars remain visible */
-  background: rgba(5, 7, 10, 0.12);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(2, 4, 7, 0.48),
+      rgba(2, 4, 7, 0.16)
+    );
 
-  /* Light blur only */
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 
   border-bottom: 1px solid
-    rgba(255, 255, 255, 0.07);
+    rgba(255, 255, 255, 0.06);
 
   transition:
-    background 0.3s ease,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    backdrop-filter 0.35s ease;
 }
 
 
 /* =========================================================
-   WHEN USER SCROLLS
+   TOP LIGHT ACCENT
+   ========================================================= */
+
+.nav::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent 5%,
+      rgba(225, 6, 0, 0.35) 30%,
+      rgba(255, 255, 255, 0.12) 50%,
+      rgba(225, 6, 0, 0.35) 70%,
+      transparent 95%
+    );
+
+  opacity: 0.8;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   SCROLLED STATE
    ========================================================= */
 
 .nav--scrolled {
-  background: rgba(5, 7, 10, 0.28);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(3, 5, 8, 0.88),
+      rgba(3, 5, 8, 0.68)
+    );
 
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
 
   border-bottom-color:
-    rgba(255, 255, 255, 0.11);
+    rgba(255, 255, 255, 0.1);
 
   box-shadow:
-    0 8px 35px rgba(0, 0, 0, 0.18);
+    0 12px 45px rgba(0, 0, 0, 0.35),
+    0 1px 0 rgba(225, 6, 0, 0.08);
 }
 
 
@@ -54,6 +95,8 @@
    ========================================================= */
 
 .nav__inner {
+  position: relative;
+
   height: 86px;
 
   display: flex;
@@ -72,7 +115,7 @@
 
 
 /* =========================================================
-   NIKKE BRAND
+   BRAND
    ========================================================= */
 
 .nav__brand {
@@ -92,31 +135,34 @@
 
   font-weight: 800;
 
-  font-size: 1.25rem;
+  font-size: 1.2rem;
 
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
 
   padding: 12px 8px;
 
   cursor: pointer;
 
   text-shadow:
-    0 2px 12px rgba(0, 0, 0, 0.7);
+    0 2px 12px rgba(0, 0, 0, 0.75);
 
   transition:
     transform 0.25s ease,
+    color 0.25s ease,
     opacity 0.25s ease;
 }
 
 .nav__brand:hover {
   transform: translateY(-1px);
 
-  opacity: 0.9;
+  color: #ffffff;
+
+  opacity: 0.96;
 }
 
 
 /* =========================================================
-   RED BRAND MARK
+   BRAND MARK
    ========================================================= */
 
 .nav__brand::before {
@@ -124,22 +170,35 @@
 
   display: inline-block;
 
-  width: 10px;
-  height: 10px;
-
-  background: var(--color-red);
+  width: 9px;
+  height: 9px;
 
   margin-right: 11px;
+
+  background: var(--color-red);
 
   border-radius: 2px;
 
   box-shadow:
-    0 0 12px rgba(225, 6, 0, 0.65);
+    0 0 8px rgba(225, 6, 0, 0.75),
+    0 0 18px rgba(225, 6, 0, 0.3);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.nav__brand:hover::before {
+  transform: rotate(45deg);
+
+  box-shadow:
+    0 0 10px rgba(225, 6, 0, 0.9),
+    0 0 22px rgba(225, 6, 0, 0.45);
 }
 
 
 /* =========================================================
-   DESKTOP NAVIGATION LINKS
+   DESKTOP NAVIGATION
    ========================================================= */
 
 .nav__links {
@@ -147,7 +206,7 @@
 
   align-items: center;
 
-  gap: 8px;
+  gap: 4px;
 }
 
 
@@ -158,26 +217,33 @@
 .nav__link {
   position: relative;
 
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 44px;
+
   background: transparent;
 
-  border: none;
+  border: 1px solid transparent;
 
   color:
-    rgba(255, 255, 255, 0.72);
+    rgba(255, 255, 255, 0.65);
 
   font-family: var(--font-hud);
 
-  font-size: 0.92rem;
+  font-size: 0.78rem;
 
-  font-weight: 500;
+  font-weight: 600;
 
-  letter-spacing: 0.05em;
+  letter-spacing: 0.11em;
 
-  padding: 12px 15px;
+  text-transform: uppercase;
 
-  border-radius: 6px;
+  padding: 11px 15px;
 
-  min-height: 44px;
+  border-radius: 5px;
 
   cursor: pointer;
 
@@ -187,6 +253,7 @@
   transition:
     color 0.25s ease,
     background 0.25s ease,
+    border-color 0.25s ease,
     transform 0.25s ease;
 }
 
@@ -199,7 +266,10 @@
   color: var(--color-white);
 
   background:
-    rgba(255, 255, 255, 0.045);
+    rgba(255, 255, 255, 0.035);
+
+  border-color:
+    rgba(255, 255, 255, 0.07);
 
   transform: translateY(-1px);
 }
@@ -210,15 +280,22 @@
    ========================================================= */
 
 .nav__link--active {
-  color: var(--color-white);
+  color: #ffffff;
 
   background:
-    rgba(225, 6, 0, 0.07);
+    linear-gradient(
+      180deg,
+      rgba(225, 6, 0, 0.09),
+      rgba(225, 6, 0, 0.025)
+    );
+
+  border-color:
+    rgba(225, 6, 0, 0.13);
 }
 
 
 /* =========================================================
-   RED ACTIVE LINE
+   ACTIVE LINK LINE
    ========================================================= */
 
 .nav__link--active::after {
@@ -226,19 +303,52 @@
 
   position: absolute;
 
-  left: 15px;
-  right: 15px;
+  left: 14px;
+  right: 14px;
 
-  bottom: 5px;
+  bottom: 4px;
 
   height: 2px;
 
-  background: var(--color-red);
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--color-red),
+      transparent
+    );
 
   border-radius: 2px;
 
   box-shadow:
-    0 0 9px rgba(225, 6, 0, 0.7);
+    0 0 8px rgba(225, 6, 0, 0.75),
+    0 0 16px rgba(225, 6, 0, 0.2);
+}
+
+
+/* =========================================================
+   SMALL RED INDICATOR
+   ========================================================= */
+
+.nav__link--active::before {
+  content: "";
+
+  position: absolute;
+
+  top: 7px;
+  right: 8px;
+
+  width: 3px;
+  height: 3px;
+
+  border-radius: 50%;
+
+  background: var(--color-red);
+
+  box-shadow:
+    0 0 7px rgba(225, 6, 0, 0.9);
+
+  opacity: 0.9;
 }
 
 
@@ -249,31 +359,34 @@
 .nav__hamburger {
   display: none;
 
+  position: relative;
+
   flex-direction: column;
 
   justify-content: center;
 
   gap: 5px;
 
-  width: 48px;
-  height: 48px;
+  width: 46px;
+  height: 46px;
 
   background:
     rgba(255, 255, 255, 0.035);
 
   border:
-    1px solid rgba(255, 255, 255, 0.14);
+    1px solid rgba(255, 255, 255, 0.13);
 
-  border-radius: 8px;
+  border-radius: 7px;
 
   cursor: pointer;
 
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
   transition:
     background 0.25s ease,
-    border-color 0.25s ease;
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .nav__hamburger:hover {
@@ -281,29 +394,33 @@
     rgba(255, 255, 255, 0.07);
 
   border-color:
-    rgba(255, 255, 255, 0.25);
+    rgba(255, 255, 255, 0.24);
+
+  box-shadow:
+    0 0 18px rgba(255, 255, 255, 0.05);
 }
 
 
 .nav__hamburger span {
-  width: 20px;
+  width: 19px;
 
   height: 2px;
 
-  background: var(--color-white);
-
   margin: 0 auto;
+
+  background: var(--color-white);
 
   border-radius: 2px;
 
   transition:
     transform 0.25s ease,
-    opacity 0.25s ease;
+    opacity 0.25s ease,
+    width 0.25s ease;
 }
 
 
 /* =========================================================
-   HAMBURGER OPEN
+   OPEN HAMBURGER
    ========================================================= */
 
 .nav__hamburger--open span:nth-child(1) {
@@ -333,20 +450,24 @@
   flex-direction: column;
 
   background:
-    rgba(5, 7, 10, 0.72);
+    linear-gradient(
+      180deg,
+      rgba(4, 6, 9, 0.94),
+      rgba(3, 5, 8, 0.88)
+    );
 
   border-top:
     1px solid rgba(255, 255, 255, 0.06);
 
   border-bottom:
-    1px solid rgba(255, 255, 255, 0.10);
+    1px solid rgba(255, 255, 255, 0.1);
 
   max-height: 0;
 
   overflow: hidden;
 
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 
   transition:
     max-height 0.4s ease;
@@ -354,28 +475,37 @@
 
 
 /* =========================================================
-   OPEN MOBILE MENU
+   MOBILE MENU OPEN
    ========================================================= */
 
 .nav__mobile--open {
   max-height: 520px;
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.35);
 }
 
 
 /* =========================================================
-   MOBILE LINKS
+   MOBILE LINK
    ========================================================= */
 
 .nav__mobile-link {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
   background: transparent;
 
   border: none;
 
   border-top:
-    1px solid rgba(255, 255, 255, 0.06);
+    1px solid rgba(255, 255, 255, 0.055);
 
   color:
-    rgba(255, 255, 255, 0.75);
+    rgba(255, 255, 255, 0.7);
 
   text-align: left;
 
@@ -384,9 +514,13 @@
 
   font-family: var(--font-hud);
 
-  font-size: 1rem;
+  font-size: 0.88rem;
 
-  letter-spacing: 0.06em;
+  font-weight: 600;
+
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
 
   min-height: 54px;
 
@@ -394,7 +528,8 @@
 
   transition:
     color 0.25s ease,
-    background 0.25s ease;
+    background 0.25s ease,
+    padding-left 0.25s ease;
 }
 
 
@@ -406,7 +541,10 @@
   color: var(--color-white);
 
   background:
-    rgba(255, 255, 255, 0.04);
+    rgba(255, 255, 255, 0.035);
+
+  padding-left:
+    calc(var(--gutter) + 5px);
 }
 
 
@@ -418,7 +556,28 @@
   color: var(--color-red);
 
   background:
-    rgba(225, 6, 0, 0.07);
+    linear-gradient(
+      90deg,
+      rgba(225, 6, 0, 0.1),
+      transparent
+    );
+}
+
+.nav__mobile-link--active::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 0;
+  bottom: 0;
+
+  width: 2px;
+
+  background: var(--color-red);
+
+  box-shadow:
+    0 0 12px rgba(225, 6, 0, 0.7);
 }
 
 
@@ -436,15 +595,16 @@
   }
 
   .nav__links {
-    gap: 3px;
+    gap: 2px;
   }
 
   .nav__link {
-    font-size: 0.84rem;
+    font-size: 0.73rem;
 
-    padding-left: 11px;
-    padding-right: 11px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
+
 }
 
 
@@ -462,7 +622,9 @@
   }
 
   .nav__brand {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
+
+    letter-spacing: 0.08em;
   }
 
   .nav__links {
@@ -476,6 +638,7 @@
   .nav__mobile {
     display: flex;
   }
+
 }
 
 
@@ -493,9 +656,9 @@
   }
 
   .nav__brand {
-    font-size: 1rem;
+    font-size: 0.94rem;
 
-    letter-spacing: 0.1em;
+    letter-spacing: 0.075em;
   }
 
   .nav__brand::before {
@@ -504,4 +667,28 @@
 
     margin-right: 8px;
   }
+
+  .nav__hamburger {
+    width: 44px;
+    height: 44px;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .nav,
+  .nav__brand,
+  .nav__link,
+  .nav__hamburger,
+  .nav__mobile,
+  .nav__mobile-link {
+    transition: none;
+  }
+
 }
