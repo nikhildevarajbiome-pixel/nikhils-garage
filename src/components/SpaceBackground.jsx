@@ -1,4 +1,4 @@
-import { Suspense, useRef } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Stars } from "@react-three/drei";
 import useIsMobile from "../hooks/useIsMobile";
@@ -44,11 +44,18 @@ function DriftingScene({ reducedMotion }) {
 export default function SpaceBackground() {
   const isMobile = useIsMobile();
   const reducedMotion = useReducedMotion();
+  const [pageVisible, setPageVisible] = useState(!document.hidden);
+  useEffect(() => {
+    const updateVisibility = () => setPageVisible(!document.hidden);
+    document.addEventListener("visibilitychange", updateVisibility);
+    return () => document.removeEventListener("visibilitychange", updateVisibility);
+  }, []);
 
   return (
     <div className="space-background" aria-hidden="true">
       <Canvas
-        dpr={isMobile ? [1, 1.2] : [1, 1.8]}
+        frameloop={pageVisible && !reducedMotion ? "always" : "never"}
+        dpr={isMobile ? 1 : [1, 1.25]}
         gl={{ antialias: !isMobile, alpha: true, powerPreference: "high-performance" }}
         camera={{ position: [0, 0, 8], fov: 55 }}
       >

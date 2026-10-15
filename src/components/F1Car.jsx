@@ -1,18 +1,21 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
+import { clone as cloneSkeleton } from "three/examples/jsm/utils/SkeletonUtils.js";
 
-function MercedesModel({ hovered }) {
+function McLarenModel({ hovered }) {
   const group = useRef(null);
 
-  const { scene } = useGLTF("/models/mercedes-w13.glb");
+  const { scene: sourceScene } = useGLTF("/models/mercedes-w13.glb");
+  const scene = useMemo(() => cloneSkeleton(sourceScene), [sourceScene]);
 
   const [modelScale, setModelScale] = useState(1);
 
   const isDragging = useRef(false);
   const lastPointerX = useRef(0);
   const targetRotationY = useRef(0);
+  const currentScale = useRef(new THREE.Vector3(1, 1, 1));
 
   useEffect(() => {
     if (!scene) return;
@@ -51,7 +54,7 @@ function MercedesModel({ hovered }) {
   const handlePointerDown = (event) => {
     isDragging.current = true;
     lastPointerX.current = event.clientX ?? 0;
-    event.stopPropagation();
+    event.target.setPointerCapture?.(event.pointerId);
   };
 
   const handlePointerMove = (event) => {
@@ -64,19 +67,13 @@ function MercedesModel({ hovered }) {
 
     targetRotationY.current += deltaX * 0.012;
 
-    event.stopPropagation();
   };
 
-  const handlePointerUp = (event) => {
+  const handlePointerUp = () => {
     isDragging.current = false;
-    event.stopPropagation();
   };
 
   const handlePointerCancel = () => {
-    isDragging.current = false;
-  };
-
-  const handlePointerLeave = () => {
     isDragging.current = false;
   };
 
@@ -109,14 +106,8 @@ function MercedesModel({ hovered }) {
     const targetScale = hovered ? 1.05 : 1;
     const finalScale = modelScale * targetScale;
 
-    group.current.scale.lerp(
-      new THREE.Vector3(
-        finalScale,
-        finalScale,
-        finalScale
-      ),
-      0.08
-    );
+    currentScale.current.setScalar(finalScale);
+    group.current.scale.lerp(currentScale.current, 0.08);
   });
 
   return (
@@ -126,7 +117,6 @@ function MercedesModel({ hovered }) {
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerCancel}
-      onPointerLeave={handlePointerLeave}
     >
       <primitive
         object={scene}
@@ -138,8 +128,6 @@ function MercedesModel({ hovered }) {
 
 export default function F1Car({ hovered = false }) {
   return (
-    <MercedesModel hovered={hovered} />
+    <McLarenModel hovered={hovered} />
   );
 }
-
-useGLTF.preload("/models/mercedes-w13.glb");

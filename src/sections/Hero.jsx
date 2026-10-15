@@ -1,11 +1,20 @@
-import { Suspense, useEffect, useRef, useState } from "react";
+import React, { Suspense, lazy, useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ContactShadows, Environment } from "@react-three/drei";
-import F1Car from "../components/F1Car";
 import Telemetry from "../components/Telemetry";
 import personalData from "../data/personalData";
 import useIsMobile from "../hooks/useIsMobile";
 import "./Hero.css";
+
+const F1Car = lazy(() => import("../components/F1Car"));
+
+class SceneErrorBoundary extends React.Component {
+  state = { failed: false };
+  static getDerivedStateFromError() { return { failed: true }; }
+  render() {
+    return this.state.failed ? null : this.props.children;
+  }
+}
 
 function ScrollCue() {
   return (
@@ -19,8 +28,8 @@ export default function Hero() {
   const isMobile = useIsMobile();
 
   const [hovered, setHovered] = useState(false);
-  const [scrollT, setScrollT] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
+  const [pageVisible, setPageVisible] = useState(!document.hidden);
 
   const sectionRef = useRef(null);
 
@@ -42,6 +51,12 @@ export default function Hero() {
   }, []);
 
   useEffect(() => {
+    const updateVisibility = () => setPageVisible(!document.hidden);
+    document.addEventListener("visibilitychange", updateVisibility);
+    return () => document.removeEventListener("visibilitychange", updateVisibility);
+  }, []);
+
+  useEffect(() => {
     const onScroll = () => {
       const h = window.innerHeight;
 
@@ -53,19 +68,25 @@ export default function Hero() {
         )
       );
 
-      setScrollT(t);
+      const canvas = sectionRef.current?.querySelector(".hero__canvas-wrap");
+      if (canvas) {
+        canvas.style.transform = `translateY(${t * 40 + carLiftRef.current}px) scale(${1 - t * 0.08})`;
+        canvas.style.opacity = String(1 - t * 0.8);
+      }
     };
 
     window.addEventListener("scroll", onScroll, {
       passive: true,
     });
+    onScroll();
 
     return () => {
       window.removeEventListener("scroll", onScroll);
     };
   }, []);
 
-  const carLift = isMobile ? -65 : -115;
+  const carLiftRef = useRef(isMobile ? -65 : -115);
+  carLiftRef.current = isMobile ? -65 : -115;
 
   return (
     <section
@@ -80,17 +101,13 @@ export default function Hero() {
 
       <div
         className="hero__canvas-wrap"
-        style={{
-          transform: `translateY(${scrollT * 40 + carLift}px) scale(${1 - scrollT * 0.08})`,
-          opacity: 1 - scrollT * 0.8,
-        }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
 
         <Canvas
-          frameloop={isVisible ? "always" : "never"}
-          dpr={isMobile ? [1, 1.2] : [1, 1.6]}
+          frameloop={isVisible && pageVisible ? "always" : "never"}
+          dpr={isMobile ? 1 : [1, 1.35]}
           camera={{
             position: [4.4, 1.6, 4.4],
             fov: 34,
@@ -98,7 +115,9 @@ export default function Hero() {
           gl={{
             antialias: !isMobile,
             powerPreference: "high-performance",
+            failIfMajorPerformanceCaveat: true,
           }}
+          fallback={null}
         >
 
           {/* =================================================
@@ -114,7 +133,7 @@ export default function Hero() {
             angle={0.35}
             penumbra={0.6}
             intensity={isMobile ? 2.0 : 1.4}
-            castShadow
+            castShadow={!isMobile}
             color="#ffffff"
           />
 
@@ -140,6 +159,7 @@ export default function Hero() {
             />
           )}
 
+          <SceneErrorBoundary>
           <Suspense fallback={null}>
 
             {/* 3D MC LAREN */}
@@ -149,15 +169,16 @@ export default function Hero() {
             <Environment preset="city" />
 
             {/* Ground shadow */}
-            <ContactShadows
+            {!isMobile && <ContactShadows
               position={[0, -0.63, 0]}
               opacity={0.5}
               scale={10}
               blur={2.4}
               far={2}
-            />
+            />}
 
           </Suspense>
+          </SceneErrorBoundary>
 
         </Canvas>
 
